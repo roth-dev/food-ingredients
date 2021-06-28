@@ -84,7 +84,7 @@ export default function Container(props = defaultProps) {
         <Button
           font="light"
           style={styles.backBtn}
-          leftIcon={props.leftIcon || Icons.times}
+          leftIcon={Icons.chevronLeft || props.leftIcon}
           leftIconStyle={[styles.leftIcon, props.leftIconStyle]}
           onPress={props.popToTop ? props.leftButtonPress : () => goBack()}
         />

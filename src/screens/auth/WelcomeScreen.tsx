@@ -5,9 +5,9 @@ import { Container } from '../../components';
 import { Button, Label } from '../../components/commons';
 import { navigate } from '../../navigation/navigation';
 import { Colors } from '../../styles';
-import { BOTTOM, HEADER, PADDING } from '../../styles/scale';
+import { BOTTOM, HEADER, PADDING, WTDP } from '../../styles/scale';
 import { FONT_SIZE_16, FONT_SIZE_18, FONT_SIZE_32 } from '../../styles/Typography';
-
+const IMAGE_WIDTH = WTDP(70, 600)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -26,8 +26,13 @@ const styles = StyleSheet.create({
     marginVertical: PADDING,
     fontSize: FONT_SIZE_16
   },
+  img: {
+    width: IMAGE_WIDTH,
+    height: IMAGE_WIDTH,
+    resizeMode: "contain"
+  },
   btnContainer: {
-    flex: 1,
+    flex: 0.5,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -52,6 +57,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = (props) => {
   const renderImage = () => {
     return (
       <Image
+        style={styles.img}
         source={assets.WELCOME}
       />
     )
