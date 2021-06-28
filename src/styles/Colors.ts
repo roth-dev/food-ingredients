@@ -1,0 +1,45 @@
+export default {
+  BASECOLOR: "#2a4cf5",
+  PRIMARY: '#ed1d32',
+  SECONDARY: '#F8004E',
+
+  TEXT: '#565D70',
+  BORDER: '#C7D4E7',
+  BACKGROUND: '#f2f2f2',
+
+  WHITE: '#FFF',
+  BLACK: '#000',
+  TRANSPARENT: '#0000',
+
+  BLUE: '#007AFF',
+  GOLD: '#FFAE00',
+  GREEN: '#1CC222',
+  PURPLE: '#A700A6',
+  DARKBLUE: '#2C185F',
+  ORANGE: '#d35400',
+  YELLOW: '#f1c40f',
+  // ACTIONS
+  ALERT: '#A700A6',
+  ERROR: '#EA2027',
+  SUCCESS: '#1CC222',
+  WARNING: '#FFAE00',
+  UNKNOWN: '#0287EE',
+  NETWORK: '#2C185F',
+  Blur: (color: string) => `${color}0F`,
+
+  GRAY_LIGHT: '#F6F6F6',
+  GRAY_MEDIUM: '#CACACA',
+  GRAY_DARK: '#8A8A8A',
+  RANDOM: [
+    '#0652DD',
+    '#F8004E',
+    '#A700A6',
+    '#1CC222',
+    '#FFAE00',
+    '#0287EE',
+    '#ff553e',
+    '#D980FA',
+    '#f1c40f',
+    '#d35400',
+  ],
+}
