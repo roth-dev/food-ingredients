@@ -1,15 +1,22 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Container } from '../../components'
-import { Button, Icons, Input, Label } from '../../components/commons'
+import { Button, Input, Label } from '../../components/commons'
 import { Colors, Themes } from '../../styles'
 import { BOTTOM, PADDING } from '../../styles/scale'
-import { FONT_SIZE_15, FONT_SIZE_16, FONT_SIZE_18, FONT_SIZE_20, FONT_SIZE_32 } from '../../styles/Typography'
-
+import {
+  FONT_SIZE_15,
+  FONT_SIZE_16,
+  FONT_SIZE_18,
+  FONT_SIZE_20,
+  FONT_SIZE_32
+} from '../../styles/Typography'
+import { facebookLogIn } from '../../libs/auth'
+import { LogcalStorage } from '../../storage/LocalStorage'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: PADDING,
+    marginHorizontal: PADDING,
     backgroundColor: Colors.WHITE,
   },
   title: {
@@ -30,6 +37,7 @@ const styles = StyleSheet.create({
   },
   socailBtn: {
     flex: 1,
+    borderRadius: 5,
     margin: PADDING
   },
   formControl: {
@@ -54,6 +62,10 @@ interface LoginScreenProps {
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = (props) => {
+  const onPressFacebookLogin = async () => {
+    const response = await facebookLogIn()
+    LogcalStorage.setToken(response?.token)
+  }
   const renderBtnSocail = () => {
     return (
       <View style={styles.wrapBtnSocail}>
@@ -69,7 +81,8 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
             title="Google" />
           <Button
             bold
-            style={[styles.socailBtn, { backgroundColor: Colors.BLUE }]}
+            onPress={onPressFacebookLogin}
+            style={[styles.socailBtn, { backgroundColor: "#4267B2" }]}
             textStyle={{ padding: PADDING, fontSize: FONT_SIZE_20 }}
             title="Facebook" />
         </View>
