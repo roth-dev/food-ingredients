@@ -4,15 +4,14 @@ import {
   ViewStyle, StyleProp,
   StyleSheet, TextStyle,
   ImageSourcePropType,
-  Image, ImageStyle, View,
+  Image, ImageStyle,
 } from 'react-native';
 import Label from '../labels/Label';
 import { FontAwesome } from '../fontawesome';
 import { Themes, Colors } from '../../../styles';
 import { HPADDING, PADDING } from '../../../styles/scale';
 import { FONT_SIZE_16, FONT_SMALL } from '../../../styles/Typography';
-import Spinner from '../loading/Spinner';
-
+import LoadingOverlay from '../loading/OverlayLoading'
 const styles = StyleSheet.create({
   btn: {
     borderRadius: 3,
@@ -67,7 +66,7 @@ export default function Button(props: IButton) {
   return (
     <TouchableOpacity
       onPress={props.onPress}
-      disabled={props.disabled || props.loading}
+      disabled={props.disabled}
       style={[styles.btn, Themes.CENTER, props.style]}
     >
       {props.leftSource ?
@@ -86,7 +85,7 @@ export default function Button(props: IButton) {
             props.leftIconStyle
           ]}
         /> : null}
-      {props.title && !props.loading ?
+      {props.title ?
         <Label bold={props.bold} style={[
           styles.font,
           props.textStyle
@@ -108,9 +107,7 @@ export default function Button(props: IButton) {
           style={[styles.img, { marginLeft: PADDING }, props.imageStyle]}
         /> : null}
       {props.loading ?
-        <View style={[props.loading ? styles.loading : undefined, props.loadingStyle]} >
-          <Spinner size={props.loadingSize} />
-        </View>
+        <LoadingOverlay loading={props.loading} />
         : null}
     </TouchableOpacity>
   );

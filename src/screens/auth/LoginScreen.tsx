@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Container } from '../../components'
 import { Button, Input, Label } from '../../components/commons'
@@ -13,6 +13,8 @@ import {
 } from '../../styles/Typography'
 import { facebookLogIn } from '../../libs/auth'
 import { LogcalStorage } from '../../storage/LocalStorage'
+import { AppCreateContext } from '../../context'
+import assets from '../../assets'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
   socailBtn: {
     flex: 1,
     borderRadius: 5,
-    margin: PADDING
+    margin: PADDING,
   },
   formControl: {
 
@@ -53,6 +55,11 @@ const styles = StyleSheet.create({
   textInput: {
     padding: PADDING,
     fontSize: FONT_SIZE_16
+  },
+  googleText: {
+    padding: PADDING,
+    color: "#333",
+    fontSize: FONT_SIZE_20
   }
 
 })
@@ -62,8 +69,12 @@ interface LoginScreenProps {
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = (props) => {
+  const { setState } = useContext(AppCreateContext)
   const onPressFacebookLogin = async () => {
     const response = await facebookLogIn()
+    setState({
+      token: response?.token
+    })
     LogcalStorage.setToken(response?.token)
   }
   const renderBtnSocail = () => {
@@ -75,13 +86,28 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
         }}>Enter vai socail networks</Label>
         <View style={[Themes.ROW]}>
           <Button
-            style={styles.socailBtn}
+            style={[styles.socailBtn,
+            {
+              backgroundColor: Colors.WHITE,
+              borderWidth: 1,
+              borderColor: "#ddd"
+            }]}
             bold
-            textStyle={{ padding: PADDING, fontSize: FONT_SIZE_20 }}
+            textStyle={styles.googleText}
+            leftSource={assets.GOOGLE}
+            imageStyle={{
+              width: 20,
+              height: 20
+            }}
             title="Google" />
           <Button
             bold
             onPress={onPressFacebookLogin}
+            leftSource={assets.FACEBOOK}
+            imageStyle={{
+              width: 20,
+              height: 20
+            }}
             style={[styles.socailBtn, { backgroundColor: "#4267B2" }]}
             textStyle={{ padding: PADDING, fontSize: FONT_SIZE_20 }}
             title="Facebook" />
