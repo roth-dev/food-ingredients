@@ -7,4 +7,6 @@ export { default as ProfileScreen } from './profile/ProfileScreen';
 
 export { default as CartScreen } from './cart/CartScreen';
 
-export { default as FavoriteScreen } from './favorite/FavoriteScreen'
+export { default as FavoriteScreen } from './favorite/FavoriteScreen';
+
+export { default as SearchScreen } from './search/SearchScreen'

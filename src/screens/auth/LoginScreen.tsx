@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Container } from '../../components'
 import { Button, Input, Label } from '../../components/commons'
@@ -70,12 +70,15 @@ interface LoginScreenProps {
 
 const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   const { setState } = useContext(AppCreateContext)
+  const [loading, setLoading] = useState<boolean>(false)
   const onPressFacebookLogin = async () => {
+    setLoading(true)
     const response = await facebookLogIn()
     setState({
       token: response?.token
     })
     LogcalStorage.setToken(response?.token)
+    setLoading(false)
   }
   const renderBtnSocail = () => {
     return (
@@ -102,6 +105,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
             title="Google" />
           <Button
             bold
+            // loading={loading}
             onPress={onPressFacebookLogin}
             leftSource={assets.FACEBOOK}
             imageStyle={{

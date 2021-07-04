@@ -3,6 +3,7 @@ export type MainParamList = {
   Profile: undefined
   Cart: undefined
   Favorite: undefined
+  Search: undefined
 }
 
 export type AuthParamList = {

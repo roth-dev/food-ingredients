@@ -38,11 +38,13 @@ const Themes = StyleSheet.create({
     borderColor: '#ddd',
   },
   SHADOW: {
-    elevation: 2,
-    shadowRadius: 2,
-    shadowOpacity: 0.5,
-    shadowColor: '#565D70',
-    shadowOffset: { width: 2, height: 2 }
+    shadowColor: 'black',
+    shadowOpacity: 0.16,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    elevation: 5,
+    backgroundColor: 'white',
+
   },
   TEXT: {
     color: '#000',

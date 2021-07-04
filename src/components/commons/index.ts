@@ -7,3 +7,4 @@ export { default as ImageLoading } from './images/ImageLoading';
 export { default as FontAwesome } from './fontawesome/FontAwesome';
 export { default as LabelIcon } from './labels/LabelIcon';
 export { default as Editor } from './inputs/Editor';
+export { default as ExpoIcons } from './icons/index'

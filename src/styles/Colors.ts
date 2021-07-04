@@ -1,5 +1,5 @@
 export default {
-  BASECOLOR: "#2a4cf5",
+  BASECOLOR: "#5117AC",
   PRIMARY: '#ed1d32',
   SECONDARY: '#F8004E',
 

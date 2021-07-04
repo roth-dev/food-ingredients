@@ -5,6 +5,8 @@ import AppStack from './AppStack';
 import { navigationRef } from './navigation'
 import { LogcalStorage } from '../storage/LocalStorage';
 import ContextProvider, { AppCreateContext } from '../context';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Themes } from '../styles';
 const Navigator = () => {
   const { token, setState } = useContext(AppCreateContext)
   const [loading, setLoading] = useState<boolean>(true)
@@ -37,7 +39,9 @@ const Navigator = () => {
   }
   return (
     <NavigationContainer ref={navigationRef}>
-      {content}
+      <SafeAreaView style={Themes.SAFEAREA}>
+        {content}
+      </SafeAreaView>
     </NavigationContainer>
   )
 }

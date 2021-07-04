@@ -1,5 +1,4 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import {
   View,
   Text,
@@ -23,14 +22,17 @@ import { HPADDING, WTDP, HEADER, PADDING, BOTTOM } from '../../styles/scale'
 import { navigate } from '../navigation';
 import { isIphoneX } from '../../utils/platform';
 import assets from '../../assets';
+import { ExpoIcons } from '../../components/commons';
+import { IconTypes } from '../../components/commons/icons';
 
 const IMAGE = WTDP(5.5, 600)
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.WHITE,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
+    height: HEADER,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
     paddingHorizontal: HPADDING,
+    backgroundColor: Colors.WHITE
   },
   btn: {
     flex: 1,
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
 });
 
 interface IButtonIcon {
+  type?: IconTypes
   title?: string
   icon?: any
   font?: "solid" | "regular" | "light" | "brand"
@@ -68,15 +71,18 @@ interface IButtonIcon {
 };
 
 const ButtonIcon = (props: IButtonIcon) => {
-  const color = props.active ? Colors.BASECOLOR : "#000";
-  const marginTop = isIphoneX() ? 0 : PADDING
-  const marginBottom = isIphoneX() ? PADDING : 0
+  const color = props.active ? Colors.BASECOLOR : Colors.GRAY_DARK;
+  const marginTop = isIphoneX() ? BOTTOM : PADDING
   return (
     <TouchableOpacity
-      style={[styles.btn, { marginTop, marginBottom }]}
+      style={[styles.btn, { marginTop }]}
       onPress={props.onPress}>
       {props.source && <Image source={props.source} style={styles.img} />}
-      {props.icon && <Ionicons name={props.icon} size={FONT_SIZE_24} color={color} />}
+      {props.icon && <ExpoIcons
+        type={props.type}
+        name={props.icon}
+        size={FONT_SIZE_24}
+        color={color} />}
       <Text style={[styles.title, { color }]}>{props.title}</Text>
     </TouchableOpacity>
   )
@@ -87,26 +93,31 @@ export default (props: BottomTabBarProps<BottomTabBarOptions>) => {
   const iphoneX = isIphoneX()
   const height = iphoneX ? HEADER * 1.6 : HEADER;
   return (
-    <View style={[Themes.ROW, { height }, styles.container]}>
+    <View style={[Themes.ROW, Themes.SHADOW, styles.container]}>
       <ButtonIcon
         font="brand"
         active={index === 0}
-        source={assets.LAYER}
+        icon="md-grid"
+        // source={assets.LAYER}
         onPress={() => navigate("Home")}
       />
       <ButtonIcon
-        source={assets.CART}
+        icon="shopping-cart"
+        type="Feather"
         active={index === 1}
         onPress={() => navigate("Cart")}
       />
       <ButtonIcon
-        source={assets.STAR}
-        active={index === 1}
+        icon="star"
+        type="AntDesign"
+        active={index === 2}
         onPress={() => navigate("Favorite")}
       />
       <ButtonIcon
-        source={assets.PROFILE}
-        active={index === 1}
+        icon="user"
+        type="Entypo"
+        // source={assets.PROFILE}
+        active={index === 3}
         onPress={() => navigate("Profile")}
       />
     </View>

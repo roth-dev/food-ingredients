@@ -7,6 +7,7 @@ export default () => {
   const onFinish = () => {
     setIsReady(true);
   }
+
   if (!isReady) {
     return (
       <AppLoading
