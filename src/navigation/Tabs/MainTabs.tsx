@@ -13,6 +13,7 @@ import {
 } from '../../screens';
 import { MainParamList } from '../ParamList';
 import HomeHeader from '../header/HomeHeader';
+import { Colors } from '../../styles';
 const Tabs = createBottomTabNavigator<MainParamList>();
 const Stack = createStackNavigator<MainParamList>()
 const HomeStack = () => {
@@ -24,27 +25,32 @@ const HomeStack = () => {
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Search" component={SearchScreen} />
     </Stack.Navigator>
   )
 }
 const CartStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerTintColor: Colors.BASECOLOR
+    }}>
       <Stack.Screen name="Cart" component={CartScreen} />
     </Stack.Navigator>
   )
 }
 const FavoriteStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerTintColor: Colors.BASECOLOR
+    }}>
       <Stack.Screen name="Favorite" component={FavoriteScreen} />
     </Stack.Navigator>
   )
 }
 const ProfileStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerTintColor: Colors.BASECOLOR
+    }}>
       <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
   )
@@ -54,6 +60,7 @@ const TabNavigator = () => {
     <Tabs.Navigator
       initialRouteName="Home"
       tabBar={props => <BottomTabs {...props} />}
+
     >
       <Tabs.Screen
         name="Home"

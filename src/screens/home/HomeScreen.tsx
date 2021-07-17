@@ -1,3 +1,4 @@
+import useSWR from 'swr'
 import { StackHeaderProps } from '@react-navigation/stack';
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, FlatList } from 'react-native'
@@ -19,6 +20,7 @@ interface HomeScreenProps extends StackHeaderProps {
 const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [refreshing, setRefreshing] = useState<boolean>(false)
+  const { data, error } = useSWR('https://sarona-backend.herokuapp.com/categories');
   const timer = () => setRefreshing(false)
   const onRefresh = () => {
     setRefreshing(true)

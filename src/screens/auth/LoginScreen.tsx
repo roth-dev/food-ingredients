@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Container } from '../../components'
 import { Button, Input, Label } from '../../components/commons'
@@ -14,7 +15,8 @@ import {
 import { facebookLogIn } from '../../libs/auth'
 import { LogcalStorage } from '../../storage/LocalStorage'
 import { AppCreateContext } from '../../context'
-import assets from '../../assets'
+import assets from '../../assets';
+import { getUser } from '../../store/actions/user'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -67,18 +69,27 @@ const styles = StyleSheet.create({
 interface LoginScreenProps {
 
 }
-
 const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   const { setState } = useContext(AppCreateContext)
   const [loading, setLoading] = useState<boolean>(false)
+  const dispatch = useDispatch()
   const onPressFacebookLogin = async () => {
-    setLoading(true)
     const response = await facebookLogIn()
+    setLoading(true)
     setState({
       token: response?.token
     })
     LogcalStorage.setToken(response?.token)
     setLoading(false)
+  }
+  const onlogin = async () => {
+    setLoading(true)
+    try {
+      await dispatch(getUser())
+      setLoading(false)
+    } catch {
+      setLoading(false)
+    }
   }
   const renderBtnSocail = () => {
     return (
@@ -157,6 +168,8 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
             borderRadius: 5,
             backgroundColor: Colors.BLUE
           }}
+          loading={loading}
+          onPress={onlogin}
           textStyle={{
             flex: 1,
             textAlign: "center",

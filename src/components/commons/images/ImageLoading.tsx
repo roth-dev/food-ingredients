@@ -34,6 +34,7 @@ interface IProps {
   imageStyle?: StyleProp<ImageStyle>,
   loadingStyle?: StyleProp<ViewStyle>
   onPress?: () => void
+  loadingSize?: "large" | "small"
 }
 
 export default (props: IProps) => {
@@ -53,7 +54,7 @@ export default (props: IProps) => {
         />
         {loading ?
           <View style={[Themes.CENTER, styles.loading, props.loadingStyle]}>
-            <ActivityIndicator color={Colors.BLUE} size='small' />
+            <ActivityIndicator color={Colors.BLUE} size={props.loadingSize || "small"} />
           </View> : null}
       </View>
     </TouchableOpacity>

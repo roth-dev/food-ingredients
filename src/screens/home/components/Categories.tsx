@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import { Button, Label } from '../../../components/commons'
 import { categories, Category } from '../../../data/dummy'
+import { navigate } from '../../../navigation/navigation'
 import { Themes } from '../../../styles'
 import { PADDING, WTDP } from '../../../styles/scale'
 import { FONT_SIZE_14, FONT_SIZE_16, FONT_SIZE_22 } from '../../../styles/Typography';
@@ -23,6 +24,12 @@ const styles = StyleSheet.create({
   seeMore: {
     opacity: .7,
     fontSize: FONT_SIZE_14
+  },
+  img: {
+    width: ITEM_WIDTH / 1.5,
+    height: ITEM_WIDTH / 1.5,
+    marginRight: 0,
+    resizeMode: "contain"
   }
 
 })
@@ -35,15 +42,11 @@ const CategoryItems = (props: Category) => {
     <View style={{ alignItems: "center", margin: PADDING }}>
       <Button
         leftSource={props.image}
-        imageStyle={{
-          width: 50,
-          height: 50,
-          marginRight: 0,
-          resizeMode: "contain"
-        }}
+        imageStyle={styles.img}
         style={[styles.btn, {
           backgroundColor: props.bgColor
         }]}
+        onPress={() => navigate("Categories", { title: props.title })}
       />
       <Label style={{
         padding: PADDING,

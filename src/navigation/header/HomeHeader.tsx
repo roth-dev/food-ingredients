@@ -6,7 +6,7 @@ import { View, StyleSheet } from 'react-native'
 import { HPADDING, PADDING } from '../../styles/scale';
 import { Button, Icons, Label } from '../../components/commons';
 import { Colors, Themes } from '../../styles';
-import { FONT_SIZE_16, FONT_SIZE_22 } from '../../styles/Typography';
+import { FONT_SIZE_16, FONT_SIZE_18, FONT_SIZE_22 } from '../../styles/Typography';
 import { navigate } from '../navigation';
 
 const styles = StyleSheet.create({
@@ -59,6 +59,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = (props) => {
       <Button
         leftIcon={Icons.search}
         iconStyle={{
+          fontSize: FONT_SIZE_18,
           color: Colors.BASECOLOR
         }}
         style={styles.btnSearch}
@@ -71,10 +72,12 @@ const HomeHeader: React.FC<HomeHeaderProps> = (props) => {
       <Button
         rightIcon={Icons.bell}
         iconStyle={{
+          fontSize: FONT_SIZE_18,
           color: Colors.BASECOLOR
         }}
         style={styles.btnBell}
         rightIconStyle={styles.bellIcon}
+        onPress={() => navigate("Notification")}
       />
     </View>
   );

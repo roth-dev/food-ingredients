@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   btn: {
     flex: 1,
     alignItems: 'center',
+    marginTop: PADDING,
     justifyContent: 'space-between',
   },
   icon: {
@@ -72,10 +73,9 @@ interface IButtonIcon {
 
 const ButtonIcon = (props: IButtonIcon) => {
   const color = props.active ? Colors.BASECOLOR : Colors.GRAY_DARK;
-  const marginTop = isIphoneX() ? BOTTOM : PADDING
   return (
     <TouchableOpacity
-      style={[styles.btn, { marginTop }]}
+      style={[styles.btn]}
       onPress={props.onPress}>
       {props.source && <Image source={props.source} style={styles.img} />}
       {props.icon && <ExpoIcons
@@ -96,18 +96,21 @@ export default (props: BottomTabBarProps<BottomTabBarOptions>) => {
     <View style={[Themes.ROW, Themes.SHADOW, styles.container]}>
       <ButtonIcon
         font="brand"
+        title="Home"
         active={index === 0}
         icon="md-grid"
         // source={assets.LAYER}
         onPress={() => navigate("Home")}
       />
       <ButtonIcon
+        title="Cart"
         icon="shopping-cart"
         type="Feather"
         active={index === 1}
         onPress={() => navigate("Cart")}
       />
       <ButtonIcon
+        title="Favorite"
         icon="star"
         type="AntDesign"
         active={index === 2}
@@ -115,6 +118,7 @@ export default (props: BottomTabBarProps<BottomTabBarOptions>) => {
       />
       <ButtonIcon
         icon="user"
+        title="Profile"
         type="Entypo"
         // source={assets.PROFILE}
         active={index === 3}

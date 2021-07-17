@@ -2,8 +2,9 @@ import React from 'react'
 import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import { Button, Icons, ImageLoading, Label } from '../../../components/commons';
 import { PopularItem, popularItems } from '../../../data/dummy';
+import { navigate } from '../../../navigation/navigation';
 import { Colors, Themes } from '../../../styles';
-import { HPADDING, PADDING, WTDP } from '../../../styles/scale';
+import { PADDING, WTDP } from '../../../styles/scale';
 import { FONT_SIZE_12, FONT_SIZE_18, FONT_SIZE_20, FONT_SIZE_22 } from '../../../styles/Typography';
 const ITEM_WIDTH = WTDP(50, 600)
 const ITEM_HIGHT = WTDP(60, 600)
@@ -54,7 +55,7 @@ interface PopularProps {
 }
 const Items = (props: PopularItem) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigate("ProductDetail", { title: props.title })}>
       <View style={[styles.item]}>
         <ImageLoading
           disabled
