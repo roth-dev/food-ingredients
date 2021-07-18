@@ -62,7 +62,7 @@ const userReducers = (state: UserState = initailState, action: UserActions): Use
       };
 
     default:
-      return initailState
+      return state
   }
 };
 

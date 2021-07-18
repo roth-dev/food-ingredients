@@ -9,7 +9,6 @@ import {
   FavoriteScreen,
   HomeScreen,
   ProfileScreen,
-  SearchScreen
 } from '../../screens';
 import { MainParamList } from '../ParamList';
 import HomeHeader from '../header/HomeHeader';
@@ -33,7 +32,13 @@ const CartStack = () => {
     <Stack.Navigator screenOptions={{
       headerTintColor: Colors.BASECOLOR
     }}>
-      <Stack.Screen name="Cart" component={CartScreen} />
+      <Stack.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          title: "MY CART"
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -42,7 +47,13 @@ const FavoriteStack = () => {
     <Stack.Navigator screenOptions={{
       headerTintColor: Colors.BASECOLOR
     }}>
-      <Stack.Screen name="Favorite" component={FavoriteScreen} />
+      <Stack.Screen
+        name="Favorite"
+        component={FavoriteScreen}
+        options={{
+          title: "MY FAVORITE"
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -51,7 +62,13 @@ const ProfileStack = () => {
     <Stack.Navigator screenOptions={{
       headerTintColor: Colors.BASECOLOR
     }}>
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: "MY ACCOUNT"
+        }}
+      />
     </Stack.Navigator>
   )
 }

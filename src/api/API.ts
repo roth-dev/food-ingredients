@@ -47,7 +47,7 @@ interface IAPI {
   // token: () => string,
   baseUrl: () => string,
 
-  get: (url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<any>>,
+  get: <T = any>(url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<T>>,
   delete: (url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<any>>,
 
   put: (url: string, data?: any, config?: AxiosRequestConfig) => Promise<AxiosResponse<any>>,

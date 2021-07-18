@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import { Button, Label } from '../../components/commons';
+import { Produts } from '../../models/products';
 import { getRouteParam, INavigationScreenProps } from '../../navigation';
+import { useAppSelector } from '../../store';
 import { Themes } from '../../styles';
 import { HPADDING, PADDING } from '../../styles/scale';
 import { FONT_SIZE_16, FONT_SIZE_22 } from '../../styles/Typography';
@@ -39,15 +41,20 @@ interface ProductDetailScreenProps extends INavigationScreenProps {
 const ProductDetailScreen: React.FC<ProductDetailScreenProps> = (props) => {
   const getParams = getRouteParam(props)
   const title = getParams("title", null)
-
+  const prodId = getParams("prodId", null)
+  const catId = getParams("catId", null)
+  const data = useAppSelector((state) => {
+    const category = state.categories.categories?.filter((cat) => cat.id === catId)[0]
+    return category?.products?.filter((item) => item.id === prodId)
+  })
   useEffect(() => {
     props.navigation.setOptions({
       title: title
     })
   }, [])
 
-  const renderItem = () => {
-    return <Items />
+  const renderItem = ({ item }: { item: Produts }) => {
+    return <Items {...item} />
   }
   const renderButton = () => {
     return (
@@ -64,7 +71,7 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = (props) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={[1]}
+        data={data}
         keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}
       />

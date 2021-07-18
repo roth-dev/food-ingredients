@@ -1,38 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
 import { navigationRef } from './navigation'
-import { LogcalStorage } from '../storage/LocalStorage';
-import ContextProvider, { AppCreateContext } from '../context';
+import ContextProvider from '../context';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Themes } from '../styles';
+import { useAppSelector } from '../store';
 const Navigator = () => {
-  const { token, setState } = useContext(AppCreateContext)
+  const token = useAppSelector((state) => state.localStorage.token)
   const [loading, setLoading] = useState<boolean>(true)
-  const getToken = () => {
-    const promise = new Promise((resolve) => {
-      LogcalStorage.init().then((res) => {
-        resolve({});
-        setState({
-          token: res.token || null
-        })
-      })
-    })
-    return promise
-  };
-
-  useEffect(() => {
-    Promise.all([
-      getToken()
-    ]).finally(() => {
-      setLoading(false);
-    })
-  }, [])
   let content: React.ReactNode;
-  if (!token && loading) {
-    content = null
-  } else if (!token && !loading) {
+  if (!token) {
     content = <AuthStack />
   } else {
     content = <AppStack />

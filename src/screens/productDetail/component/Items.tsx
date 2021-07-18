@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import assets from '../../../assets';
 import { Button, Icons, ImageLoading, Label } from '../../../components/commons';
+import { Produts } from '../../../models/products';
 import { Colors, Themes } from '../../../styles';
 import { PADDING, WTDP } from '../../../styles/scale';
-import { FONT_SIZE_15, FONT_SIZE_16, FONT_SIZE_18 } from '../../../styles/Typography';
+import { FONT_SIZE_16, FONT_SIZE_18 } from '../../../styles/Typography';
 const IMAGE_WIDTH = WTDP(100, 600)
 const BTN_HEART_WIDTH = WTDP(10, 600)
 const styles = StyleSheet.create({
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   description: {
-    fontSize: FONT_SIZE_15
+    fontSize: FONT_SIZE_16
   },
   btn_heart: {
     width: BTN_HEART_WIDTH,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 
 })
 
-interface ItemsProps {
+interface ItemsProps extends Produts {
 
 }
 
@@ -46,7 +46,7 @@ const Items: React.FC<ItemsProps> = (props) => {
         disabled
         loadingSize="large"
         imageStyle={styles.bgImage}
-        source={assets.IMAGE_BACKGROUND}
+        source={{ uri: props.image.url }}
       />
       <View style={styles.wrapp_content}>
         <View style={[Themes.ROW, styles.wrapp_discription]}>
@@ -65,11 +65,8 @@ const Items: React.FC<ItemsProps> = (props) => {
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
         </Label>
         <Label bold style={[styles.label, { paddingVertical: PADDING }]}>Ingredient</Label>
-        <Label style={[styles.description, { lineHeight: 25 }]}>- Arrachera 10kg</Label>
-        <Label style={[styles.description, { lineHeight: 25 }]}>- Pan ajonjoli 20kg</Label>
-        <Label style={[styles.description, { lineHeight: 25 }]}>- Lechuga 100kg</Label>
-        <Label style={[styles.description, { lineHeight: 25 }]}>- Arrachera 20kg</Label>
-        <Label style={[styles.description, { lineHeight: 25 }]}>- Cebolla 30kg</Label>
+        <Label style={[styles.description, { lineHeight: 25 }]}>{props.ingredients}</Label>
+
       </View>
     </View>
   );

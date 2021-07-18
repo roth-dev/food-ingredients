@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import { Button, Label } from '../../../components/commons'
-import { categories, Category } from '../../../data/dummy'
+import { Category } from '../../../data/dummy'
 import { navigate } from '../../../navigation/navigation'
-import { Themes } from '../../../styles'
+import { useAppSelector } from '../../../store'
+import { Colors, Themes } from '../../../styles'
 import { PADDING, WTDP } from '../../../styles/scale'
 import { FONT_SIZE_14, FONT_SIZE_16, FONT_SIZE_22 } from '../../../styles/Typography';
 const ITEM_WIDTH = WTDP(20, 600)
@@ -37,16 +38,23 @@ const styles = StyleSheet.create({
 interface CategoriesProps {
 
 }
-const CategoryItems = (props: Category) => {
+
+interface CategoryItemProps extends Category {
+  index: number
+}
+const CategoryItems = (props: CategoryItemProps) => {
   return (
     <View style={{ alignItems: "center", margin: PADDING }}>
       <Button
         leftSource={props.image}
         imageStyle={styles.img}
         style={[styles.btn, {
-          backgroundColor: props.bgColor
+          backgroundColor: Colors.RANDOM[props.index + 1]
         }]}
-        onPress={() => navigate("Categories", { title: props.title })}
+        onPress={() => navigate("Categories", {
+          catId: props.id,
+          title: props.title
+        })}
       />
       <Label style={{
         padding: PADDING,
@@ -57,8 +65,10 @@ const CategoryItems = (props: Category) => {
   )
 }
 const Categories: React.FC<CategoriesProps> = (props) => {
-  const renderItem = ({ item }: { item: Category }) => {
-    return <CategoryItems {...item} />
+
+  const { categories } = useAppSelector((state) => state.categories)
+  const renderItem = ({ item, index }: { item: Category, index: number },) => {
+    return <CategoryItems {...item} index={index} />
   }
   return (
     <View style={styles.container}>

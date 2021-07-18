@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { createRef, useContext, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { Container } from '../../components'
-import { Button, Input, Label } from '../../components/commons'
+import { Button, Icons, Input, Label } from '../../components/commons'
 import { Colors, Themes } from '../../styles'
 import { BOTTOM, PADDING } from '../../styles/scale'
 import {
@@ -16,7 +16,9 @@ import { facebookLogIn } from '../../libs/auth'
 import { LogcalStorage } from '../../storage/LocalStorage'
 import { AppCreateContext } from '../../context'
 import assets from '../../assets';
-import { getUser } from '../../store/actions/user'
+import { login } from '../../store/actions/user'
+import { UserInput } from '../../models/user'
+import Validate from '../../utils/validate'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     margin: PADDING,
   },
   formControl: {
-
+    marginTop: PADDING,
   },
   input: {
     marginTop: BOTTOM,
@@ -62,6 +64,10 @@ const styles = StyleSheet.create({
     padding: PADDING,
     color: "#333",
     fontSize: FONT_SIZE_20
+  },
+  icon: {
+    color: Colors.GRAY_DARK,
+    fontSize: FONT_SIZE_18
   }
 
 })
@@ -71,7 +77,13 @@ interface LoginScreenProps {
 }
 const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   const { setState } = useContext(AppCreateContext)
+  const emailRef = createRef<TextInput>()
+  const passwordRef = createRef<TextInput>()
   const [loading, setLoading] = useState<boolean>(false)
+  const [userInput, setUserInput] = useState<UserInput>({
+    identifier: "",
+    password: ""
+  })
   const dispatch = useDispatch()
   const onPressFacebookLogin = async () => {
     const response = await facebookLogIn()
@@ -85,11 +97,41 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   const onlogin = async () => {
     setLoading(true)
     try {
-      await dispatch(getUser())
+      await dispatch(login(userInput))
       setLoading(false)
     } catch {
       setLoading(false)
     }
+  }
+  const onVerify = () => {
+    let message: string = "";
+    let title: string = "";
+    let onPress: () => void
+    if (Validate.isEmpty(userInput.identifier)
+      || !Validate.isEmail(userInput.identifier)) {
+      title = "Invalid Email"
+      message = "Please enter valid email."
+      onPress = () => emailRef.current?.focus()
+    } else if (Validate.isEmpty(userInput.password)) {
+      title = "Invalid Password"
+      message = "Please enter password."
+      onPress = () => passwordRef.current?.focus()
+    }
+    if (message) {
+      Alert.alert(title, message, [{
+        text: "Ok",
+        onPress: () => onPress()
+      }])
+    } else {
+      onlogin()
+    }
+  }
+  const onChangeText = (value: string, type: "identifier" | "password") => {
+    setUserInput({
+      ...userInput,
+      [type]: value
+    })
+
   }
   const renderBtnSocail = () => {
     return (
@@ -133,16 +175,33 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   const renderInput = () => {
     return (
       <View style={styles.formControl}>
-        <Label style={{ textAlign: "center", marginBottom: BOTTOM }}>And login with account delivery only</Label>
+        <Label style={{
+          textAlign: "center",
+        }}>And login with account delivery only</Label>
         <Input
+          value={userInput.identifier}
+          autoCapitalize="none"
+          autoCorrect={false}
           style={styles.input}
+          reference={emailRef}
           textStyle={styles.textInput}
           placeholder="Email"
+          leftIcon={Icons.user}
+          iconStyle={styles.icon}
+          onChangeText={(value) => onChangeText(value, "identifier")}
         />
         <Input
+          value={userInput.password}
           style={styles.input}
+          autoCapitalize="none"
+          autoCorrect={false}
+          reference={passwordRef}
           textStyle={styles.textInput}
-          placeholder="Email"
+          placeholder="Password"
+          leftIcon={Icons.lockAlt}
+          iconStyle={styles.icon}
+          onChangeText={(value) => onChangeText(value, "password")}
+
         />
         <Button
           style={{
@@ -169,7 +228,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
             backgroundColor: Colors.BLUE
           }}
           loading={loading}
-          onPress={onlogin}
+          onPress={onVerify}
           textStyle={{
             flex: 1,
             textAlign: "center",
@@ -200,9 +259,9 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
       style={styles.container}>
       <Label style={styles.title}>Login Now</Label>
       <Label style={styles.label}>Please login or sign up to continue using our app</Label>
-      {renderBtnSocail()}
       {renderInput()}
       {renderButton()}
+      {renderBtnSocail()}
     </Container>
   );
 }

@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Button } from '../../components/commons';
-import { AppCreateContext } from '../../context';
-import { LogcalStorage } from '../../storage/LocalStorage';
-
+import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { Colors } from '../../styles';
+import ProfileMenu from './ProfileMenu';
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Colors.WHITE
   }
   //your styles go here!!
 
@@ -17,18 +16,16 @@ interface ProfileScreenProps {
 }
 
 const ProfileScreen: React.FC<ProfileScreenProps> = (props) => {
-  const { logout } = useContext(AppCreateContext)
 
-  const onLogout = () => {
-    logout()
-    LogcalStorage.logout()
+  const renderItem = () => {
+    return <ProfileMenu />
   }
   return (
     <View style={styles.container}>
-      <Text>ProfileScreen Screen</Text>
-      <Button
-        title="Logout"
-        onPress={onLogout}
+      <FlatList
+        data={[1]}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={renderItem}
       />
     </View>
   );
