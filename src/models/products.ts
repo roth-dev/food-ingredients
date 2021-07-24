@@ -11,7 +11,7 @@ export interface Image {
   height?: number,
   url?: string,
 }
-export interface Produts {
+export interface Products {
   id: string
   title: string
   image: Image
@@ -21,4 +21,5 @@ export interface Produts {
   price: number
   published_at: string
   updatedAt: string
+  descriptions: string
 }

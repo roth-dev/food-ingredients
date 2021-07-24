@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
 })
 
 interface IProps {
+  
 
 }
 

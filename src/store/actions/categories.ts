@@ -14,12 +14,7 @@ export const fetchSuccess = (data: CategoryState): CategoryAction => {
 
 export const getCategories = (): ThunkAction<Promise<void>, RootState, {}, CategoryAction> => {
   return async (dispatch: ThunkDispatch<Promise<void>, {}, CategoryAction>, getState: () => RootState) => {
-    // const token = getState().localStorage.token
-    const rs = await API.get("categories", {
-      // headers: {
-      //   Authorization: `Bearer ${token}`
-      // }
-    })
+    const rs = await API.get("categories")
     const data = {
       categories: rs.data
     }

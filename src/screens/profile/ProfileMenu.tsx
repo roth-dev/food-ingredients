@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import assets from '../../assets';
 import { Icons, ImageLoading, Label, LabelIcon } from '../../components/commons';
-import { AppCreateContext } from '../../context';
 import { navigate } from '../../navigation/navigation';
-import { LogcalStorage } from '../../storage/LocalStorage';
 import { Colors, Themes } from '../../styles';
 import { BOTTOM, HPADDING, PADDING, WTDP } from '../../styles/scale';
 import { FONT_SIZE_16, FONT_SIZE_17, FONT_SIZE_18, FONT_SIZE_20 } from '../../styles/Typography';
@@ -139,10 +137,12 @@ const ProfileMenu: React.FC<ProfileMenuProps> = (props) => {
         <Menu
           icon={Icons.listAlt}
           title="Your Orders"
+          onPress={() => navigate("Order")}
         />
         <Menu
           icon={Icons.gift}
           title="Promotions"
+          onPress={() => navigate("Promotion")}
         />
         <Menu
           icon={Icons.star}
@@ -157,10 +157,12 @@ const ProfileMenu: React.FC<ProfileMenuProps> = (props) => {
         <Menu
           icon={Icons.slidersH}
           title="Settings"
+          onPress={() => navigate("Settings")}
         />
         <Menu
           icon={Icons.userEdit}
           title="Edit Profile"
+          onPress={() => navigate("EditProfile")}
         />
         <Menu
           icon={Icons.powerOff}

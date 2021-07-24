@@ -7,6 +7,10 @@ export type MainParamList = {
   ProductDetail: undefined
   Categories: undefined
   Notification: undefined
+  Order: undefined
+  Settings: undefined
+  EditProfile: undefined
+  Promotion: undefined
 }
 
 export type AuthParamList = {

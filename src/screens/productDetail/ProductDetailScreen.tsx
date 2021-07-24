@@ -2,17 +2,19 @@ import React, { useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import { Button, Label } from '../../components/commons';
-import { Produts } from '../../models/products';
+import { Products } from '../../models/products';
 import { getRouteParam, INavigationScreenProps } from '../../navigation';
 import { useAppSelector } from '../../store';
-import { Themes } from '../../styles';
+import { Colors, Themes } from '../../styles';
 import { HPADDING, PADDING } from '../../styles/scale';
 import { FONT_SIZE_16, FONT_SIZE_22 } from '../../styles/Typography';
+import Validate from '../../utils/validate';
 import Items from './component/Items'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Colors.WHITE
   },
   footer: {
     padding: PADDING,
@@ -53,7 +55,7 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = (props) => {
     })
   }, [])
 
-  const renderItem = ({ item }: { item: Produts }) => {
+  const renderItem = ({ item }: { item: Products }) => {
     return <Items {...item} />
   }
   const renderButton = () => {
@@ -64,7 +66,7 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = (props) => {
           title="Add to cart"
           textStyle={styles.btnTitle}
         />
-        <Label bold style={styles.price}>$12.58</Label>
+        <Label bold style={styles.price}>$ {Validate.round(Validate.getCurrency(data[0].price), 3).toFixed(2)}</Label>
       </View>
     )
   }

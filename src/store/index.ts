@@ -10,11 +10,13 @@ import TodoReducer, { TodoState } from './reducers/todo'
 import UserReducer, { UserState } from './reducers/user';
 import localStorageReducer, { LocalState } from './reducers/localStorage';
 import CategoryReducer, { CategoryState } from './reducers/categories'
+import FavoriteReducer, { FavoriteState } from './reducers/favorite'
 export type AppState = {
   todo: TodoState,
   user: UserState,
   localStorage: LocalState,
-  categories: CategoryState
+  categories: CategoryState,
+  favorite: FavoriteState,
 }
 const persistConfig = {
   key: 'root',
@@ -27,6 +29,7 @@ const rootReducer = combineReducers<AppState>({
   user: UserReducer,
   categories: CategoryReducer,
   localStorage: localStorageReducer,
+  favorite: FavoriteReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export type RootState = ReturnType<typeof rootReducer>;

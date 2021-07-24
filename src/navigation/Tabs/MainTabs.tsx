@@ -8,11 +8,10 @@ import {
   CartScreen,
   FavoriteScreen,
   HomeScreen,
-  ProfileScreen,
 } from '../../screens';
 import { MainParamList } from '../ParamList';
-import HomeHeader from '../header/HomeHeader';
 import { Colors } from '../../styles';
+import ProfileNavigator from './ProfileNavigator';
 const Tabs = createBottomTabNavigator<MainParamList>();
 const Stack = createStackNavigator<MainParamList>()
 const HomeStack = () => {
@@ -57,21 +56,6 @@ const FavoriteStack = () => {
     </Stack.Navigator>
   )
 }
-const ProfileStack = () => {
-  return (
-    <Stack.Navigator screenOptions={{
-      headerTintColor: Colors.BASECOLOR
-    }}>
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          title: "MY ACCOUNT"
-        }}
-      />
-    </Stack.Navigator>
-  )
-}
 const TabNavigator = () => {
   return (
     <Tabs.Navigator
@@ -93,7 +77,7 @@ const TabNavigator = () => {
       />
       <Tabs.Screen
         name="Profile"
-        component={ProfileStack}
+        component={ProfileNavigator}
       />
     </Tabs.Navigator>
   )

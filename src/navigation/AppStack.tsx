@@ -4,7 +4,6 @@ import {
   ProductDetailScreen,
   CategorieScreen,
   SearchScreen,
-  FavoriteScreen,
   NotificationScreen
 } from "../screens";
 import { MainParamList } from "./ParamList";

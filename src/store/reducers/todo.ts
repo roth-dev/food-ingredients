@@ -23,7 +23,6 @@ const videoReducers = (state: TodoState = initailState, action: VideoActions): T
         ...state,
         todo: []
       };
-
     default:
       return initailState
   }
