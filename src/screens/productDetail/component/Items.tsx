@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Button, Icons, ImageLoading, Label } from '../../../components/commons';
-import { Produts } from '../../../models/products';
+import { Products } from '../../../models/products';
 import { Colors, Themes } from '../../../styles';
 import { PADDING, WTDP } from '../../../styles/scale';
 import { FONT_SIZE_16, FONT_SIZE_18 } from '../../../styles/Typography';
+import { useDispatch } from 'react-redux'
+import { toggleFavorite } from '../../../store/actions/favorite';
+import { useAppSelector } from '../../../store';
 const IMAGE_WIDTH = WTDP(100, 600)
 const BTN_HEART_WIDTH = WTDP(10, 600)
 const styles = StyleSheet.create({
@@ -35,11 +38,14 @@ const styles = StyleSheet.create({
 
 })
 
-interface ItemsProps extends Produts {
+interface ItemsProps extends Products {
 
 }
 
 const Items: React.FC<ItemsProps> = (props) => {
+  const disptach = useDispatch();
+  const items = useAppSelector(state => state.favorite.items)
+  const index = items.findIndex(item => item.id === props.id)
   return (
     <View style={styles.container}>
       <ImageLoading
@@ -53,20 +59,20 @@ const Items: React.FC<ItemsProps> = (props) => {
           <Label bold style={styles.label}>Description</Label>
           <Button
             style={styles.btn_heart}
-            leftIcon={Icons.heart}
+            leftIcon={index < -1 ? Icons.heartBeat : Icons.heart}
             iconStyle={{
               marginRight: 0,
               width: "auto",
               fontSize: FONT_SIZE_18
             }}
+            onPress={() => disptach(toggleFavorite(props.id, props.category))}
           />
         </View>
         <Label style={styles.description}>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+          {props.descriptions}
         </Label>
         <Label bold style={[styles.label, { paddingVertical: PADDING }]}>Ingredient</Label>
         <Label style={[styles.description, { lineHeight: 25 }]}>{props.ingredients}</Label>
-
       </View>
     </View>
   );
