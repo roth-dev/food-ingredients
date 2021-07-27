@@ -10,10 +10,13 @@ export const toggleFavorite = (prodId: string, catId: string): ThunkAction<void,
     const category = state.categories.categories?.filter((cat) => cat.id === catId);
     const product = category[0].products?.filter((prod) => prod.id === prodId);
     const index = items.findIndex((item) => item.id === prodId);
-    let arr = [...items, ...product!]
+    let arr = [...product!, ...items]
     if (index > -1) {
       arr = items.filter((i) => i.id !== prodId);
     }
-    dispatch({ type: Type.TOGGLE_FAVORITE, payload: { items: arr } });
+    dispatch({
+      type: Type.TOGGLE_FAVORITE,
+      payload: { items: arr }
+    });
   }
 }

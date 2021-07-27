@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Button, Icons, ImageLoading, Label } from '../../../components/commons';
+import { View, StyleSheet, Pressable } from 'react-native'
+import { Button, ExpoIcons, Icons, ImageLoading, Label } from '../../../components/commons';
 import { Products } from '../../../models/products';
 import { Colors, Themes } from '../../../styles';
 import { PADDING, WTDP } from '../../../styles/scale';
@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
     width: BTN_HEART_WIDTH,
     height: BTN_HEART_WIDTH,
     borderRadius: BTN_HEART_WIDTH / 2,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: Colors.PRIMARY
   }
 
@@ -57,16 +59,24 @@ const Items: React.FC<ItemsProps> = (props) => {
       <View style={styles.wrapp_content}>
         <View style={[Themes.ROW, styles.wrapp_discription]}>
           <Label bold style={styles.label}>Description</Label>
-          <Button
-            style={styles.btn_heart}
-            leftIcon={index < -1 ? Icons.heartBeat : Icons.heart}
-            iconStyle={{
-              marginRight: 0,
-              width: "auto",
-              fontSize: FONT_SIZE_18
-            }}
-            onPress={() => disptach(toggleFavorite(props.id, props.category))}
-          />
+          <View style={Themes.ROW}>
+            <Pressable
+              style={styles.btn_heart}
+              onPress={() => disptach(toggleFavorite(props.id, props.category))}
+            >
+              <ExpoIcons
+                type="AntDesign"
+                name={index > -1 ? "heart" : "hearto"}
+                size={20}
+                color={Colors.WHITE}
+              />
+            </Pressable>
+            <ExpoIcons
+              style={{ marginHorizontal: PADDING }}
+              size={20}
+              type="Entypo"
+              name="share" />
+          </View>
         </View>
         <Label style={styles.description}>
           {props.descriptions}

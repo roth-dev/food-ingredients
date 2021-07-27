@@ -28,7 +28,7 @@ const CategorieScreen: React.FC<CategorieScreenProps> = (props) => {
   })
   useEffect(() => {
     props.navigation.setOptions({
-      title: title
+      title: `ប្រភេទ ${title}`
     })
   }, [])
   const renderItems = ({ item }: { item: Category }) => {

@@ -11,17 +11,19 @@ import UserReducer, { UserState } from './reducers/user';
 import localStorageReducer, { LocalState } from './reducers/localStorage';
 import CategoryReducer, { CategoryState } from './reducers/categories'
 import FavoriteReducer, { FavoriteState } from './reducers/favorite'
+import cartReducer, { CartState } from './reducers/cart';
 export type AppState = {
   todo: TodoState,
   user: UserState,
   localStorage: LocalState,
   categories: CategoryState,
   favorite: FavoriteState,
+  cart: CartState,
 }
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['localStorage'],
+  whitelist: ['localStorage', 'favorite'],
 };
 
 const rootReducer = combineReducers<AppState>({
@@ -30,6 +32,7 @@ const rootReducer = combineReducers<AppState>({
   categories: CategoryReducer,
   localStorage: localStorageReducer,
   favorite: FavoriteReducer,
+  cart: cartReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export type RootState = ReturnType<typeof rootReducer>;

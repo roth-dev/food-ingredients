@@ -18,6 +18,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerTitleAlign: "left",
         headerShown: false,
         // header: (((props: StackHeaderProps) => <HomeHeader {...props} />))
       }}
@@ -29,6 +30,7 @@ const HomeStack = () => {
 const CartStack = () => {
   return (
     <Stack.Navigator screenOptions={{
+      headerTitleAlign: "left",
       headerTintColor: Colors.BASECOLOR
     }}>
       <Stack.Screen
@@ -44,6 +46,7 @@ const CartStack = () => {
 const FavoriteStack = () => {
   return (
     <Stack.Navigator screenOptions={{
+      headerTitleAlign: "left",
       headerTintColor: Colors.BASECOLOR
     }}>
       <Stack.Screen

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
-import { Button, Label } from '../../components/commons';
+import { Button, ExpoIcons, Label } from '../../components/commons';
 import { Products } from '../../models/products';
 import { getRouteParam, INavigationScreenProps } from '../../navigation';
+import { dispatch, navigate } from '../../navigation/navigation';
 import { useAppSelector } from '../../store';
+import { addToCart } from '../../store/actions/cart';
 import { Colors, Themes } from '../../styles';
 import { HPADDING, PADDING } from '../../styles/scale';
 import { FONT_SIZE_16, FONT_SIZE_22 } from '../../styles/Typography';
@@ -51,10 +53,24 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = (props) => {
   })
   useEffect(() => {
     props.navigation.setOptions({
-      title: title
+      title: title,
+      headerRight: () => (
+        <ExpoIcons
+          style={{
+            marginRight: PADDING
+          }}
+          size={22}
+          type="Feather"
+          name="search"
+          color={Colors.BASECOLOR}
+          onPress={() => navigate("Search")}
+        />
+      )
     })
   }, [])
-
+  const _onAddToCart = () => {
+    dispatch(addToCart(String(prodId), String(catId), 1))
+  }
   const renderItem = ({ item }: { item: Products }) => {
     return <Items {...item} />
   }
@@ -62,9 +78,11 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = (props) => {
     return (
       <View style={[Themes.ROW, Themes.SHADOW, styles.footer]}>
         <Button
+          bold
           style={styles.btn}
           title="Add to cart"
           textStyle={styles.btnTitle}
+          onPress={_onAddToCart}
         />
         <Label bold style={styles.price}>$ {Validate.round(Validate.getCurrency(data[0].price), 3).toFixed(2)}</Label>
       </View>

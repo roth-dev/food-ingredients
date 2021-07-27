@@ -13,7 +13,7 @@ export default (props: IProps) => {
   return (
     <Text
       {...props}
-      style={[Themes.TEXT, { fontWeight: props.bold ? '700' : '400' }, props.style]}
+      style={[Themes.TEXT, { fontFamily: props.bold ? "OpenSans Bold" : 'OpenSans' }, props.style]}
     >{props.children}</Text>
   );
 }

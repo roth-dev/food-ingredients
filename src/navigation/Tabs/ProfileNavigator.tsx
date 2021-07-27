@@ -17,12 +17,16 @@ export default () => {
     <Stack.Navigator
       initialRouteName="Profile"
       screenOptions={{
+        headerTitleAlign: "left",
         headerTintColor: Colors.BASECOLOR,
         headerLeft: (props => <HeaderLeft {...props} />)
       }}
 
     >
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen options={{
+        headerLeft: () => null,
+        title: "MY PROFILE"
+      }} name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Order" component={OrderListScreen} />
       <Stack.Screen name="Promotion" component={PromotionScreen} />
       <Stack.Screen name="Settings" component={SettingScreen} />

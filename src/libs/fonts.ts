@@ -5,6 +5,8 @@ import * as Font from 'expo-font';
 
 export const fetchFonts = () => new Promise<void>((resolve, reject) => {
   Font.loadAsync({
+    "OpenSans": require('../../assets/fonts/OpenSans-Regular.ttf'),
+    "OpenSans Bold": require('../../assets/fonts/OpenSans-Bold.ttf'),
     "Khmer OS": require('../../assets/fonts/Khmer-OS.ttf'),
     "HanumanBold": require('../../assets/fonts/Hanuman-Bold.ttf'),
     "solid": require('../../assets/fonts/FontAwesome5Pro-Solid.ttf'),

@@ -49,6 +49,7 @@ const Themes = StyleSheet.create({
   TEXT: {
     color: '#000',
     fontSize: FONT_SMALL,
+    fontFamily: "OpenSans"
   },
   TITLE: {
     color: '#000',
