@@ -1,41 +1,23 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Label } from '../../components/commons';
-import { FONT_SIZE_18 } from '../../styles/Typography';
-import LottieView from 'lottie-react-native';
-import assets from '../../assets/lottie';
+import React from "react";
+import { StyleSheet, FlatList, View } from "react-native";
+import { useAppSelector } from "../../store";
+import Empty from "./components/Empty";
+import CartItems from "./components";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: "center",
-    alignItems: "center",
-  }
-  //your styles go here!!
+const styles = StyleSheet.create({});
 
-})
-
-interface CartScreenProps {
-
-}
+interface CartScreenProps {}
 
 const CartScreen: React.FC<CartScreenProps> = (props) => {
-  return (
-    <View style={styles.container}>
-      <LottieView
-        style={{
-          width: 200,
-          height: 200,
-        }}
-        autoPlay={true}
-        loop={true}
-        source={assets.EMPTY_CART}
-      />
-      <Label style={{
-        fontSize: FONT_SIZE_18
-      }}>Your cart is empty!</Label>
-    </View>
-  );
-}
-export default CartScreen
+  const { cartItems } = useAppSelector((state) => state.cart);
+
+  if (!cartItems.length) {
+    return <Empty />;
+  }
+
+  const renderItems = () => {
+    return;
+  };
+  return <CartItems cartItems={cartItems} />;
+};
+export default CartScreen;
