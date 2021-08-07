@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
   title: {
     color: '#000',
     fontSize: FONT_SIZE_11,
-    paddingHorizontal: HPADDING
+    paddingHorizontal: HPADDING,
+    paddingBottom:PADDING
   },
   number: {
     color: '#FFF',
