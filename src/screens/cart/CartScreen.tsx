@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useAppSelector } from "../../store";
 import Empty from "./components/Empty";
 import CartItems from "./components";
@@ -15,9 +15,6 @@ const CartScreen: React.FC<CartScreenProps> = (props) => {
     return <Empty />;
   }
 
-  const renderItems = () => {
-    return;
-  };
   return <CartItems cartItems={cartItems} />;
 };
 export default CartScreen;

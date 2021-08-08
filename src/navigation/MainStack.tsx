@@ -1,35 +1,39 @@
-import React, { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from './AuthStack';
-import AppStack from './AppStack';
-import { navigationRef } from './navigation'
-import ContextProvider from '../context';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Themes } from '../styles';
-import { useAppSelector } from '../store';
+import React, { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthStack from "./AuthStack";
+import AppStack from "./AppStack";
+import { navigationRef } from "./navigation";
+import ContextProvider from "../context";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Themes } from "../styles";
+import { useAppSelector } from "../store";
+import LoadingScreen from "../screens/auth/LoadingScreen";
 const Navigator = () => {
-  const token = useAppSelector((state) => state.localStorage.token)
-  const [loading, setLoading] = useState<boolean>(true)
+  const {
+    user,
+    categories: { categories: cat, loading },
+  } = useAppSelector((state) => state);
   let content: React.ReactNode;
-  if (!token) {
-    content = <AuthStack />
+  if (!user.token) {
+    content = <AuthStack />;
+  } else if (user.token && loading) {
+    content = <LoadingScreen />;
+  } else if (user.token && !loading && !cat.length) {
+    content = <LoadingScreen />;
   } else {
-    content = <AppStack />
+    content = <AppStack />;
   }
   return (
     <NavigationContainer ref={navigationRef}>
-      <SafeAreaView style={Themes.SAFEAREA}>
-        {content}
-      </SafeAreaView>
+      <SafeAreaView style={Themes.SAFEAREA}>{content}</SafeAreaView>
     </NavigationContainer>
-  )
-}
+  );
+};
 
 export default () => {
   return (
     <ContextProvider>
       <Navigator />
     </ContextProvider>
-  )
-
-}
+  );
+};

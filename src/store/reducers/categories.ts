@@ -3,7 +3,8 @@ import { SET_CATEGORIES } from "../actions/categories"
 
 
 export interface CategoryState {
-  categories?: Category[]
+  categories?: Category[],
+  loading?: boolean
 }
 
 interface Action<T> {
@@ -14,7 +15,8 @@ interface Action<T> {
 export type CategoryAction = Action<CategoryState>
 
 const initState: CategoryState = {
-  categories: []
+  categories: [],
+  loading: true
 }
 
 const CategoryReducer = (state: CategoryState = initState, action: CategoryAction): CategoryState => {
@@ -23,7 +25,8 @@ const CategoryReducer = (state: CategoryState = initState, action: CategoryActio
       const { payload } = <Action<CategoryState>>action
       return {
         ...state,
-        categories: payload?.categories
+        categories: payload?.categories,
+        loading: payload?.loading
       }
     default:
       return state

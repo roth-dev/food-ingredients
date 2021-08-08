@@ -1,5 +1,5 @@
 
-import { type } from '../actions/user'
+import { Type } from '../type';
 
 interface IUser {
   _id?: string,
@@ -10,6 +10,8 @@ interface IUser {
   provider?: string,
   createdAt?: string,
   updatedAt?: string,
+  image?: Image
+  phone?: number
 }
 interface Rols {
   _id?: string,
@@ -35,32 +37,37 @@ interface Image {
 export type User = {
   jwt?: string
   user?: IUser
-  rols?: Rols
-  phone?: number
-  image?: Image
+  // rols?: Rols
+
 }
+
 export interface UserState {
-  user: User
+  user?: IUser
+  token?: string | null
 }
 interface Action<T> {
   type: string
-  payload: T
+  payload?: T
 }
 
 export type UserActions = Action<UserState>;
 
 const initailState: UserState = {
   user: {},
+  token: null,
 };
 const userReducers = (state: UserState = initailState, action: UserActions): UserState => {
+  const { payload } = <Action<UserState>>action;
+
   switch (action.type) {
-    case type.SET_USER:
-      action = <Action<UserState>>action;
+    case Type.SET_USER:
       return {
         ...state,
-        user: {}
+        user: payload?.user,
+        token: payload?.token,
       };
-
+    case Type.LOGOUT:
+      return initailState;
     default:
       return state
   }

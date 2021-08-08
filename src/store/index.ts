@@ -23,7 +23,7 @@ export type AppState = {
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["localStorage", "favorite", "cart"],
+  whitelist: ["localStorage", "favorite", "cart", "user"],
 };
 
 const rootReducer = combineReducers<AppState>({

@@ -1,6 +1,8 @@
 import { Products } from "../models/products";
 
 export enum Type {
+  LOGOUT = "LOGOUT",
+  SET_USER = "SET_USER",
   SET_PRODUCTS = "SET_PRODUCTS",
   ADD_TO_CART = "ADD_TO_CART",
   REMOVE_FROM_CART = "REMOVE_FROM_CART",
@@ -10,7 +12,7 @@ export enum Type {
 
 export type SuccessAction<T> = {
   type: string;
-  payload: T;
+  payload?: T;
 };
 
 export type FailureAction<T> = {
