@@ -67,8 +67,6 @@ const promotion: Promotion[] = [
   },
 ];
 
-// Hello bro are you here ?yes I'm here ok share your phone screen to desktop
-
 const PromotionItems = (props: Promotion) => {
   return (
     <TouchableOpacity>
