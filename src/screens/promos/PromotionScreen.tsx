@@ -53,10 +53,10 @@ const promotion: Promotion[] = [
   },
   {
     title: "Happy New Year Promotion",
-    startDate: "August 14 2021",
-    endDate: "August 16 2021",
+    startDate: "April 14 2021",
+    endDate: "April 16 2021",
     description:
-      "ចាប់ពីថ្ងៃនេះដល់ថ្ងៃទី 30 សីហា 2021 នេះទៅ ក្នុងការកុម៉្មង់ចាប់ពី 5$ ឡើងទៅហ្នឹងមានការ Discount 15% ភ្លាមៗ",
+      "ចាប់ពីថ្ងៃនេះដល់ថ្ងៃទី 16 មេសា 2021 នេះទៅ ក្នុងការកុម៉្មង់ចាប់ពី 5$ ឡើងទៅហ្នឹងមានការ Discount 15% ភ្លាមៗ",
   },
   {
     title: "Pchhum Ben day Promotion",
