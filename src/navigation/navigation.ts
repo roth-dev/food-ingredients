@@ -3,8 +3,8 @@ import {
   StackActions,
   NavigationContainerRef, NavigationAction
 } from '@react-navigation/native';
-import { MainParamList, AuthParamList } from './ParamList';
-type SuperParamList = MainParamList & AuthParamList
+import { MainParamList, AuthParamList, DeliveryParamList } from './ParamList';
+type SuperParamList = MainParamList & AuthParamList & DeliveryParamList
 export const navigationRef:
   React.RefObject<NavigationContainerRef<SuperParamList>> = React.createRef();
 
