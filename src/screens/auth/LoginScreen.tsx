@@ -23,6 +23,7 @@ import assets from "../../assets";
 import { login } from "../../store/actions/user";
 import { UserInput } from "../../models/user";
 import Validate from "../../utils/validate";
+import { useNavigation } from "@react-navigation/native";
 import { navigate } from "../../navigation/navigation";
 const styles = StyleSheet.create({
   container: {
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
 
 interface LoginScreenProps {}
 const LoginScreen: React.FC<LoginScreenProps> = (props) => {
+  const navigation = useNavigation();
   const emailRef = createRef<TextInput>();
   const passwordRef = createRef<TextInput>();
   const [loading, setLoading] = useState<boolean>(false);

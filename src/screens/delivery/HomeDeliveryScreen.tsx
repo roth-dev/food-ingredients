@@ -10,6 +10,8 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import MapView, { Callout, Circle, Marker } from "react-native-maps";
 import { useLocation } from "../../hooks/useLocation";
 import HomeHeader from "../../navigation/header/HomeHeader";
+import { Colors } from "../../styles";
+import NewOrder from "./components/NewOrder";
 
 const HomeDelivery: React.FC<{}> = (props: any) => {
   const map = useRef<MapView>(null);
@@ -45,8 +47,9 @@ const HomeDelivery: React.FC<{}> = (props: any) => {
     );
   }
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: Colors.WHITE }}>
       <HomeHeader title="Delivery" disableIcon {...props} />
+      <NewOrder />
     </View>
   );
 };
