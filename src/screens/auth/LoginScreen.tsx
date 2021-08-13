@@ -1,4 +1,4 @@
-import React, { createRef, useContext, useState } from "react";
+import React, { createRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   View,
@@ -19,8 +19,6 @@ import {
   FONT_SIZE_32,
 } from "../../styles/Typography";
 import { facebookLogIn } from "../../libs/auth";
-import { LogcalStorage } from "../../storage/LocalStorage";
-import { AppCreateContext } from "../../context";
 import assets from "../../assets";
 import { login } from "../../store/actions/user";
 import { UserInput } from "../../models/user";
@@ -79,7 +77,6 @@ const styles = StyleSheet.create({
 
 interface LoginScreenProps {}
 const LoginScreen: React.FC<LoginScreenProps> = (props) => {
-  const { setState } = useContext(AppCreateContext);
   const emailRef = createRef<TextInput>();
   const passwordRef = createRef<TextInput>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -89,12 +86,8 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   });
   const dispatch = useDispatch();
   const onPressFacebookLogin = async () => {
-    const response = await facebookLogIn();
     setLoading(true);
-    setState({
-      token: response?.token,
-    });
-    LogcalStorage.setToken(response?.token);
+    const response = await facebookLogIn();
     setLoading(false);
   };
   const onlogin = async () => {

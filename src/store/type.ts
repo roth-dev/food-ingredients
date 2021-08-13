@@ -8,6 +8,7 @@ export enum Type {
   REMOVE_FROM_CART = "REMOVE_FROM_CART",
   TOGGLE_FAVORITE = "TOGGLE_FAVORITE",
   REMOVE_FAVORITE = "REMOVE_FAVORITE",
+  CREATE_ORDERS = "CREATE_ORDERS",
 }
 
 export type SuccessAction<T> = {
@@ -17,7 +18,7 @@ export type SuccessAction<T> = {
 
 export type FailureAction<T> = {
   type: string;
-  [key: string]: T;
+  payload: T;
 };
 
 export interface CartItems extends Products {

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import { useDispatch } from "react-redux";
 import { Button, Label } from "../../../components/commons";
+import { navigate } from "../../../navigation/navigation";
 import { useAppSelector } from "../../../store";
+import { createOrder } from "../../../store/actions/orders";
 import { Colors, Themes } from "../../../styles";
 import { HPADDING, PADDING } from "../../../styles/scale";
 import {
@@ -42,7 +45,20 @@ const styles = StyleSheet.create({
 interface Props {}
 
 export default (props: Props) => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const { cartTotalAmount } = useAppSelector((state) => state.cart);
+
+  const handleCreateOrder = async () => {
+    setLoading(true);
+    try {
+      await dispatch(createOrder());
+      setLoading(false);
+      navigate("OrderSuccess");
+    } catch (e) {
+      setLoading(false);
+    }
+  };
   return (
     <View style={styles.footer}>
       <View style={[Themes.ROW, styles.footer_content]}>
@@ -61,6 +77,8 @@ export default (props: Props) => {
         bold
         style={styles.button}
         title="Order Now"
+        loading={loading}
+        onPress={handleCreateOrder}
         textStyle={{
           fontSize: FONT_SIZE_20,
           padding: HPADDING,

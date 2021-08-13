@@ -8,6 +8,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Themes } from "../styles";
 import { useAppSelector } from "../store";
 import LoadingScreen from "../screens/auth/LoadingScreen";
+import { getLocationPermission } from "../libs/location";
+import DevliveryStack from "./DevliveryStack";
 const Navigator = () => {
   const {
     user,
@@ -21,10 +23,16 @@ const Navigator = () => {
   } else if (user.token && !loading && !cat.length) {
     content = <LoadingScreen />;
   } else {
+    // content = <DevliveryStack />;
     content = <AppStack />;
   }
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer
+      onReady={() => {
+        getLocationPermission();
+      }}
+      ref={navigationRef}
+    >
       <SafeAreaView style={Themes.SAFEAREA}>{content}</SafeAreaView>
     </NavigationContainer>
   );

@@ -6,19 +6,19 @@ import {
   TypedUseSelectorHook,
 } from "react-redux";
 import ReduxThunk from "redux-thunk";
-import TodoReducer, { TodoState } from "./reducers/todo";
 import UserReducer, { UserState } from "./reducers/user";
 import localStorageReducer, { LocalState } from "./reducers/localStorage";
 import CategoryReducer, { CategoryState } from "./reducers/categories";
 import FavoriteReducer, { FavoriteState } from "./reducers/favorite";
 import cartReducer, { CartState } from "./reducers/cart";
+import orderReducer, { OrderState } from "./reducers/orders";
 export type AppState = {
-  todo: TodoState;
   user: UserState;
   localStorage: LocalState;
   categories: CategoryState;
   favorite: FavoriteState;
   cart: CartState;
+  orders: OrderState;
 };
 const persistConfig = {
   key: "root",
@@ -27,12 +27,12 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers<AppState>({
-  todo: TodoReducer,
   user: UserReducer,
   categories: CategoryReducer,
   localStorage: localStorageReducer,
   favorite: FavoriteReducer,
   cart: cartReducer,
+  orders: orderReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export type RootState = ReturnType<typeof rootReducer>;

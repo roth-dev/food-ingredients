@@ -1,108 +1,135 @@
-import React from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
-import { Button, Icons, ImageLoading, Label } from '../../../components/commons';
-import { PopularItem, popularItems } from '../../../data/dummy';
-import { navigate } from '../../../navigation/navigation';
-import { Colors, Themes } from '../../../styles';
-import { PADDING, WTDP } from '../../../styles/scale';
-import { FONT_SIZE_12, FONT_SIZE_18, FONT_SIZE_20, FONT_SIZE_22 } from '../../../styles/Typography';
-const ITEM_WIDTH = WTDP(50, 600)
-const ITEM_HIGHT = WTDP(60, 600)
+import React from "react";
+import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import {
+  Button,
+  Icons,
+  ImageLoading,
+  Label,
+} from "../../../components/commons";
+import { Products } from "../../../models/products";
+import { navigate } from "../../../navigation/navigation";
+import { useAppSelector } from "../../../store";
+import { Colors, Themes } from "../../../styles";
+import { PADDING, WTDP } from "../../../styles/scale";
+import {
+  FONT_SIZE_12,
+  FONT_SIZE_14,
+  FONT_SIZE_18,
+  FONT_SIZE_20,
+  FONT_SIZE_22,
+} from "../../../styles/Typography";
+const ITEM_WIDTH = WTDP(50, 600);
+const IMAGE_WIDTH = WTDP(30, 600);
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   label: {
     fontSize: FONT_SIZE_22,
-    paddingVertical: PADDING
+    paddingVertical: PADDING,
   },
   item: {
     flex: 1,
     margin: PADDING,
     width: ITEM_WIDTH,
-    height: ITEM_HIGHT,
     padding: PADDING,
     borderRadius: 20,
-    // alignItems: "center",
-    // justifyContent: "center",
-    shadowColor: 'black',
-    shadowOpacity: 0.10,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 10,
-    elevation: 5,
-    backgroundColor: 'white'
+    backgroundColor: "white",
   },
   img: {
-    width: "100%",
-    height: 140,
-    alignSelf: "center"
+    width: IMAGE_WIDTH,
+    height: IMAGE_WIDTH,
+    borderRadius: IMAGE_WIDTH / 2,
+    overflow: "hidden",
+    alignSelf: "center",
   },
   wrapPrice: {
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   price: {
-    fontSize: FONT_SIZE_20
+    fontSize: FONT_SIZE_20,
   },
   smallBtn: {
     height: 40,
     width: 40,
-    borderRadius: 100
-  }
-})
+    borderRadius: 100,
+  },
+});
 
-interface PopularProps {
-
-}
-const Items = (props: PopularItem) => {
+interface PopularProps {}
+const Items = (props: Products) => {
+  const onPressNavigate = () => {
+    navigate("ProductDetail", {
+      title: props.title,
+      prodId: props.id,
+      catId: props.category,
+    });
+  };
   return (
-    <TouchableOpacity onPress={() => navigate("ProductDetail", { title: props.title })}>
-      <View style={[styles.item]}>
+    <TouchableOpacity onPress={onPressNavigate}>
+      <View style={[Themes.SHADOW, styles.item]}>
         <ImageLoading
           disabled
-          style={styles.img}
+          style={[styles.img]}
           imageStyle={{
             flex: 1,
             width: undefined,
             height: undefined,
-            resizeMode: "contain"
-
+            resizeMode: "cover",
           }}
-          source={props.image} />
-        <Label style={{
-          color: Colors.GRAY_DARK,
-          fontSize: FONT_SIZE_18
-        }}>{props.title}</Label>
-        <Label style={{
-          color: Colors.GRAY_DARK,
-          fontSize: FONT_SIZE_12,
-          lineHeight: 25
-        }}>{props.description}</Label>
+          source={props.image}
+        />
+        <Label
+          numberOfLines={1}
+          style={{
+            paddingTop: PADDING,
+            fontSize: FONT_SIZE_18,
+          }}
+        >
+          {props.title}
+        </Label>
+        <Label
+          numberOfLines={1}
+          style={{
+            color: Colors.GRAY_DARK,
+            fontSize: FONT_SIZE_14,
+            lineHeight: 25,
+          }}
+        >
+          {props.descriptions}
+        </Label>
         <View style={[Themes.ROW, styles.wrapPrice]}>
-          <Label bold
-            style={styles.price}>${props.price}</Label>
+          <Label bold style={styles.price}>
+            ${props.price.toFixed(2)}
+          </Label>
           <Button
             style={[Themes.SHADOW, styles.smallBtn]}
             iconStyle={{
               color: "#000",
-              marginLeft: 0
+              marginLeft: 0,
             }}
             rightIcon={Icons.chevronRight}
+            onPress={onPressNavigate}
           />
         </View>
       </View>
     </TouchableOpacity>
-
-  )
-}
+  );
+};
 const Popular: React.FC<PopularProps> = (props) => {
-  const renderItems = ({ item }: { item: PopularItem }) => {
-    return <Items {...item} />
-  }
+  const items = useAppSelector(
+    (state) => state.categories?.categories[0]?.products
+  );
+  const renderItems = ({ item }: { item: Products }) => {
+    return <Items {...item} />;
+  };
   return (
     <View style={styles.container}>
-      <Label bold style={styles.label}>Popular Foods</Label>
+      <Label bold style={styles.label}>
+        Popular Foods
+      </Label>
       <FlatList
-        data={popularItems}
+        data={items}
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, i) => i.toString()}
@@ -110,5 +137,5 @@ const Popular: React.FC<PopularProps> = (props) => {
       />
     </View>
   );
-}
-export default Popular
+};
+export default Popular;

@@ -1,13 +1,15 @@
-import React from 'react'
+import React from "react";
+import { StackHeaderProps } from "@react-navigation/stack";
+import { View, StyleSheet } from "react-native";
+import { HPADDING, PADDING } from "../../styles/scale";
+import { Button, Icons, Label } from "../../components/commons";
+import { Colors, Themes } from "../../styles";
 import {
-  StackHeaderProps
-} from '@react-navigation/stack';
-import { View, StyleSheet } from 'react-native'
-import { HPADDING, PADDING } from '../../styles/scale';
-import { Button, Icons, Label } from '../../components/commons';
-import { Colors, Themes } from '../../styles';
-import { FONT_SIZE_16, FONT_SIZE_18, FONT_SIZE_22 } from '../../styles/Typography';
-import { navigate } from '../navigation';
+  FONT_SIZE_16,
+  FONT_SIZE_18,
+  FONT_SIZE_22,
+} from "../../styles/Typography";
+import { navigate } from "../navigation";
 
 const styles = StyleSheet.create({
   container: {
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
   },
   btnBell: {
     flex: 1,
-    backgroundColor: Colors.WHITE
+    backgroundColor: Colors.WHITE,
   },
   bellIcon: {
     flex: 1,
@@ -47,39 +49,47 @@ const styles = StyleSheet.create({
     textAlign: "right",
     width: "auto",
     fontSize: FONT_SIZE_22,
-  }
+  },
+});
 
-})
-
-interface HomeHeaderProps extends StackHeaderProps { }
+interface HomeHeaderProps extends StackHeaderProps {
+  title?: string;
+  disableIcon?: boolean;
+}
 
 const HomeHeader: React.FC<HomeHeaderProps> = (props) => {
   return (
     <View style={[Themes.SHADOW, styles.container]}>
-      <Button
-        leftIcon={Icons.search}
-        iconStyle={{
-          fontSize: FONT_SIZE_18,
-          color: Colors.BASECOLOR
-        }}
-        style={styles.btnSearch}
-        title="Search..."
-        textStyle={styles.textSearch}
-        onPress={() => navigate("Search")}
-      />
+      {!props.disableIcon && (
+        <Button
+          leftIcon={Icons.search}
+          iconStyle={{
+            fontSize: FONT_SIZE_18,
+            color: Colors.BASECOLOR,
+          }}
+          style={styles.btnSearch}
+          title="Search..."
+          textStyle={styles.textSearch}
+          onPress={() => navigate("Search")}
+        />
+      )}
 
-      <Label bold style={styles.title}>Resturant</Label>
-      <Button
-        rightIcon={Icons.bell}
-        iconStyle={{
-          fontSize: FONT_SIZE_18,
-          color: Colors.BASECOLOR
-        }}
-        style={styles.btnBell}
-        rightIconStyle={styles.bellIcon}
-        onPress={() => navigate("Notification")}
-      />
+      <Label bold style={styles.title}>
+        {!props.title ? "Resturant" : props.title}
+      </Label>
+      {!props.disableIcon && (
+        <Button
+          rightIcon={Icons.bell}
+          iconStyle={{
+            fontSize: FONT_SIZE_18,
+            color: Colors.BASECOLOR,
+          }}
+          style={styles.btnBell}
+          rightIconStyle={styles.bellIcon}
+          onPress={() => navigate("Notification")}
+        />
+      )}
     </View>
   );
-}
-export default HomeHeader
+};
+export default HomeHeader;

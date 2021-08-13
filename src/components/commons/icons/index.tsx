@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleProp, TextStyle } from 'react-native';
+import React from "react";
+import { StyleProp, TextStyle } from "react-native";
 import {
   Zocial,
   Entypo,
@@ -11,8 +11,10 @@ import {
   MaterialIcons,
   SimpleLineIcons,
   MaterialCommunityIcons,
-} from '@expo/vector-icons'
-export type IconTypes = "Ionicons"
+  FontAwesome5,
+} from "@expo/vector-icons";
+export type IconTypes =
+  | "Ionicons"
   | "Feather"
   | "SimpleLineIcons"
   | "Entypo"
@@ -22,69 +24,75 @@ export type IconTypes = "Ionicons"
   | "MaterialCommunityIcons"
   | "MaterialIcons"
   | "AntDesign"
-type ZocialT = keyof typeof Zocial.glyphMap
-type EntypoT = keyof typeof Entypo.glyphMap
-type OcticonsT = keyof typeof Octicons.glyphMap
-type IoniconsT = keyof typeof Ionicons.glyphMap
-type AntDesignT = keyof typeof AntDesign.glyphMap
-type EvilIconsT = keyof typeof EvilIcons.glyphMap
-type MaterialIconsT = keyof typeof MaterialIcons.glyphMap
-type MaterialCommunityIconsT = keyof typeof MaterialCommunityIcons.glyphMap
+  | "FontAwesome5";
+type ZocialT = keyof typeof Zocial.glyphMap;
+type EntypoT = keyof typeof Entypo.glyphMap;
+type OcticonsT = keyof typeof Octicons.glyphMap;
+type IoniconsT = keyof typeof Ionicons.glyphMap;
+type AntDesignT = keyof typeof AntDesign.glyphMap;
+type EvilIconsT = keyof typeof EvilIcons.glyphMap;
+type MaterialIconsT = keyof typeof MaterialIcons.glyphMap;
+type MaterialCommunityIconsT = keyof typeof MaterialCommunityIcons.glyphMap;
+type FontAwesome5T = keyof typeof FontAwesome5.glyphMap;
 
-export type TypeExpoIcons = IoniconsT
+export type TypeExpoIcons =
+  | IoniconsT
   | ZocialT
   | EntypoT
   | OcticonsT
   | EvilIconsT
   | AntDesignT
   | MaterialIconsT
-  | MaterialCommunityIconsT
+  | FontAwesome5T
+  | MaterialCommunityIconsT;
 
 interface IconProps {
-  name: TypeExpoIcons
-  size?: number
-  type?: IconTypes
-  color?: string
-  onPress?: () => void
-  disable?: boolean
-  style?: StyleProp<TextStyle>
+  name: TypeExpoIcons;
+  size?: number;
+  type?: IconTypes;
+  color?: string;
+  onPress?: () => void;
+  disable?: boolean;
+  style?: StyleProp<TextStyle>;
 }
 
 const Icons = (props: IconProps) => {
   let icons;
   switch (props.type) {
     case "Zocial":
-      icons = <Zocial {...props} />
+      icons = <Zocial {...props} />;
       break;
     case "Octicons":
-      icons = <Octicons {...props} />
+      icons = <Octicons {...props} />;
       break;
     case "Feather":
-      icons = <Feather {...props} />
+      icons = <Feather {...props} />;
       break;
     case "AntDesign":
-      icons = <AntDesign {...props} />
+      icons = <AntDesign {...props} />;
       break;
     case "Entypo":
-      icons = <Entypo {...props} />
+      icons = <Entypo {...props} />;
       break;
     case "EvilIcons":
-      icons = <EvilIcons {...props} />
+      icons = <EvilIcons {...props} />;
+    case "FontAwesome5":
+      icons = <FontAwesome5 {...props} />;
       break;
     case "MaterialIcons":
-      icons = <MaterialIcons {...props} />
+      icons = <MaterialIcons {...props} />;
       break;
     case "SimpleLineIcons":
-      icons = <SimpleLineIcons {...props} />
+      icons = <SimpleLineIcons {...props} />;
       break;
     case "MaterialCommunityIcons":
-      icons = <MaterialCommunityIcons {...props} />
+      icons = <MaterialCommunityIcons {...props} />;
       break;
     default:
-      icons = <Ionicons {...props} />
-      break
+      icons = <Ionicons {...props} />;
+      break;
   }
-  return icons
-}
+  return icons;
+};
 
-export default Icons
+export default Icons;

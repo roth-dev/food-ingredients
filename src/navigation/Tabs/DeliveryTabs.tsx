@@ -1,30 +1,22 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   BottomTabBarProps,
   BottomTabBarOptions,
+  createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { Colors, Themes } from "../../styles";
 import {
   FONT_SIZE_11,
   FONT_SIZE_22,
-  FONT_SIZE_24,
   FONT_SIZE_9,
 } from "../../styles/Typography";
-import { HPADDING, WTDP, HEADER, PADDING, BOTTOM } from "../../styles/scale";
+import { HPADDING, WTDP, HEADER, PADDING } from "../../styles/scale";
 import { navigate } from "../navigation";
-import { isIphoneX } from "../../utils/platform";
-import assets from "../../assets";
-import { ExpoIcons } from "../../components/commons";
-import { IconTypes } from "../../components/commons/icons";
-
+import { ButtonIcon } from "./BottomTabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import { DeliveryParamList } from "../ParamList";
+import { HomeDelivery } from "../../screens/delivery/index";
 const IMAGE = WTDP(5.5, 600);
 const styles = StyleSheet.create({
   container: {
@@ -59,64 +51,29 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE_9,
   },
 });
-
-interface IButtonIcon {
-  type?: IconTypes;
-  title?: string;
-  icon?: any;
-  font?: "solid" | "regular" | "light" | "brand";
-  onPress?: () => void;
-  notification?: number;
-  active: boolean;
-  source?: ImageSourcePropType;
-}
-
-export const ButtonIcon = (props: IButtonIcon) => {
-  const iphoneX = isIphoneX();
-  const paddingBottom = iphoneX ? 0 : HPADDING;
-  const color = props.active ? Colors.BASECOLOR : Colors.GRAY_DARK;
-  return (
-    <TouchableOpacity style={[styles.btn]} onPress={props.onPress}>
-      {props.source && <Image source={props.source} style={styles.img} />}
-      {props.icon && (
-        <ExpoIcons
-          type={props.type}
-          name={props.icon}
-          size={FONT_SIZE_24}
-          color={color}
-        />
-      )}
-      <Text style={[styles.title, { color, paddingBottom }]}>
-        {props.title}
-      </Text>
-    </TouchableOpacity>
-  );
-};
-
-export default (props: BottomTabBarProps<BottomTabBarOptions>) => {
+const CustomTabs = (props: BottomTabBarProps<BottomTabBarOptions>) => {
   const index = props.state.index;
-
   return (
     <View style={[Themes.ROW, Themes.SHADOW, styles.container]}>
       <ButtonIcon
         font="brand"
-        title="Home"
+        title="Dashboard"
         active={index === 0}
         icon="md-grid"
         // source={assets.LAYER}
-        onPress={() => navigate("Home")}
+        onPress={() => navigate("HomeDelivery")}
       />
       <ButtonIcon
-        title="Cart"
-        icon="shopping-cart"
+        title="History"
+        icon="clock"
         type="Feather"
         active={index === 1}
         onPress={() => navigate("Cart")}
       />
       <ButtonIcon
-        title="Favorite"
-        icon="star"
-        type="AntDesign"
+        title="Order"
+        icon="list-alt"
+        type="FontAwesome5"
         active={index === 2}
         onPress={() => navigate("Favorite")}
       />
@@ -131,3 +88,28 @@ export default (props: BottomTabBarProps<BottomTabBarOptions>) => {
     </View>
   );
 };
+
+const Tabs = createBottomTabNavigator<DeliveryParamList>();
+const Stack = createStackNavigator<DeliveryParamList>();
+
+const HomeDeliveryStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="HomeDelivery" component={HomeDelivery} />
+    </Stack.Navigator>
+  );
+};
+export default function DevliveryTabs() {
+  return (
+    <Tabs.Navigator
+      initialRouteName="HomeDelivery"
+      tabBar={(props) => <CustomTabs {...props} />}
+    >
+      <Tabs.Screen name="HomeDelivery" component={HomeDeliveryStack} />
+    </Tabs.Navigator>
+  );
+}

@@ -15,5 +15,6 @@ export default {
   DRINK2: require('./drink2.png'),
   POPULARPIZZA: require('./popularPizza.png'),
   POPULARBURGER: require('./popularBurger.png'),
-  IMAGE_BACKGROUND: require('./background-detail.png')
+  IMAGE_BACKGROUND: require('./background-detail.png'),
+  MAP_MARKER: require('./map-marker.png'),
 }

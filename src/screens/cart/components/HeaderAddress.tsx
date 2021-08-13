@@ -1,9 +1,11 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { useDispatch } from "react-redux";
 import { Button, ExpoIcons, Icons, Label } from "../../../components/commons";
 import { Colors, Themes } from "../../../styles";
 import { HPADDING, PADDING, WTDP } from "../../../styles/scale";
 import { FONT_SIZE_24 } from "../../../styles/Typography";
+import {createOrder} from '../../../store/actions/orders'
 const BUTTON_WIDTH = WTDP(12, 600);
 const styles = StyleSheet.create({
   container: {
@@ -51,7 +53,6 @@ const address = [
 ];
 export default (props: Props) => {
   const [index, setIndex] = React.useState(0);
-
   const onItemPress = (ix: number) => {
     setIndex((prev) => (ix !== prev ? ix : prev));
   };

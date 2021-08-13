@@ -12,7 +12,7 @@ import { useAppSelector } from "../../../store";
 import { removeCartItem } from "../../../store/actions/cart";
 import { CartItems } from "../../../store/type";
 import { Colors, Themes } from "../../../styles";
-import { HTDP, PADDING, WTDP } from "../../../styles/scale";
+import { BOTTOM, HPADDING, HTDP, PADDING, WTDP } from "../../../styles/scale";
 import { FONT_SIZE_16, FONT_SIZE_20 } from "../../../styles/Typography";
 import Validate from "../../../utils/validate";
 import FooterCartInfo from "./FooterCartInfo";
@@ -20,8 +20,9 @@ const IMG_WIDTH = WTDP(35, 600);
 const BUTTON_WIDTH = WTDP(8, 600);
 const FLOATING_WIDTH = WTDP(10, 600);
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, marginTop: HPADDING },
   item: {
+    height: "100%",
     margin: PADDING,
     padding: PADDING,
     borderRadius: 20,
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE_20,
   },
   content: {
+    flex: 1,
     marginVertical: PADDING,
     marginHorizontal: PADDING * 2,
     justifyContent: "space-between",
@@ -156,8 +158,11 @@ const Items = (props: CartItems) => {
           style={styles.image_container}
           source={{ uri: props.image.url }}
         />
-        <Label style={styles.title}>{props.title}</Label>
-        <Label style={styles.cat}>ប្រភេទ {category}</Label>
+        <View style={{ flex: 1 }}>
+          <Label style={styles.title}>{props.title}</Label>
+          <Label style={styles.cat}>ប្រភេទ {category}</Label>
+        </View>
+
         <View style={[Themes.ROW, styles.content]}>
           <View style={[Themes.ROW]}>
             <Button
@@ -199,9 +204,12 @@ const CartItem: React.FC<CartItemsProps> = (props) => {
         keyExtractor={(_, index) => index.toString()}
         contentContainerStyle={{
           paddingHorizontal: PADDING,
+          paddingBottom: BOTTOM,
         }}
       />
-      <FooterCartInfo />
+      <View style={{ flex: 0, marginTop: PADDING }}>
+        <FooterCartInfo />
+      </View>
     </View>
   );
 };

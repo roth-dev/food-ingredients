@@ -3,7 +3,7 @@ import { StackHeaderProps } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import HomeHeader from "../../navigation/header/HomeHeader";
-import { Colors } from "../../styles";
+import { Colors, Themes } from "../../styles";
 import { BOTTOM, PADDING } from "../../styles/scale";
 import Items from "./components";
 import { getCategories } from "../../store/actions/categories";
