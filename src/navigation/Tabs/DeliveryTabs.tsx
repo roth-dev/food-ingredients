@@ -8,6 +8,7 @@ import {
 import { Colors, Themes } from "../../styles";
 import {
   FONT_SIZE_11,
+  FONT_SIZE_18,
   FONT_SIZE_22,
   FONT_SIZE_9,
 } from "../../styles/Typography";
@@ -16,7 +17,12 @@ import { navigate } from "../navigation";
 import { ButtonIcon } from "./BottomTabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { DeliveryParamList } from "../ParamList";
-import { HomeDelivery } from "../../screens/delivery/index";
+import {
+  HistoryDelivery,
+  HomeDelivery,
+  OrderDelivery,
+  DeliveryProfile,
+} from "../../screens/delivery/index";
 const IMAGE = WTDP(5.5, 600);
 const styles = StyleSheet.create({
   container: {
@@ -68,14 +74,14 @@ const CustomTabs = (props: BottomTabBarProps<BottomTabBarOptions>) => {
         icon="clock"
         type="Feather"
         active={index === 1}
-        onPress={() => navigate("Cart")}
+        onPress={() => navigate("HistoryDelivery")}
       />
       <ButtonIcon
         title="Order"
         icon="list-alt"
         type="FontAwesome5"
         active={index === 2}
-        onPress={() => navigate("Favorite")}
+        onPress={() => navigate("OrderDelivery")}
       />
       <ButtonIcon
         icon="user"
@@ -83,7 +89,7 @@ const CustomTabs = (props: BottomTabBarProps<BottomTabBarOptions>) => {
         type="Entypo"
         // source={assets.PROFILE}
         active={index === 3}
-        onPress={() => navigate("Profile")}
+        onPress={() => navigate("DeliveryProfile")}
       />
     </View>
   );
@@ -103,6 +109,48 @@ const HomeDeliveryStack = () => {
     </Stack.Navigator>
   );
 };
+const HistoryStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{
+          title: "History",
+          headerTitleStyle: { fontSize: FONT_SIZE_22, color: Colors.BASECOLOR },
+        }}
+        name="HistoryDelivery"
+        component={HistoryDelivery}
+      />
+    </Stack.Navigator>
+  );
+};
+const OrderStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{
+          title: "Order",
+          headerTitleStyle: { fontSize: FONT_SIZE_22, color: Colors.BASECOLOR },
+        }}
+        name="OrderDelivery"
+        component={OrderDelivery}
+      />
+    </Stack.Navigator>
+  );
+};
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{
+          title: "Profile",
+          headerTitleStyle: { fontSize: FONT_SIZE_22, color: Colors.BASECOLOR },
+        }}
+        name="DeliveryProfile"
+        component={DeliveryProfile}
+      />
+    </Stack.Navigator>
+  );
+};
 export default function DevliveryTabs() {
   return (
     <Tabs.Navigator
@@ -110,6 +158,9 @@ export default function DevliveryTabs() {
       tabBar={(props) => <CustomTabs {...props} />}
     >
       <Tabs.Screen name="HomeDelivery" component={HomeDeliveryStack} />
+      <Tabs.Screen name="HistoryDelivery" component={HistoryStack} />
+      <Tabs.Screen name="OrderDelivery" component={OrderStack} />
+      <Tabs.Screen name="DeliveryProfile" component={ProfileStack} />
     </Tabs.Navigator>
   );
 }

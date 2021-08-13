@@ -21,4 +21,7 @@ export type AuthParamList = {
 
 export type DeliveryParamList = {
   HomeDelivery: undefined;
+  HistoryDelivery:undefined;
+  OrderDelivery:undefined;
+  DeliveryProfile:undefined;
 };
