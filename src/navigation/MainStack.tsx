@@ -22,8 +22,9 @@ const Navigator = () => {
     content = <LoadingScreen />;
   } else if (user.token && !loading && !cat.length) {
     content = <LoadingScreen />;
+  } else if (user.token && user?.user?.role?.name === "devlivery" && !loading) {
+    content = <DevliveryStack />;
   } else {
-    // content = <DevliveryStack />;
     content = <AppStack />;
   }
   return (

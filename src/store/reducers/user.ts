@@ -11,6 +11,7 @@ interface IUser {
   updatedAt?: string;
   image?: Image;
   phone?: number;
+  role?: Rols;
 }
 interface Rols {
   _id?: string;
@@ -36,7 +37,6 @@ interface Image {
 export type User = {
   jwt?: string;
   user?: IUser;
-  // rols?: Rols
 };
 
 export interface UserState {
