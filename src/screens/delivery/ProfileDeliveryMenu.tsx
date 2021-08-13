@@ -33,12 +33,15 @@ const styles = StyleSheet.create({
   },
   profile_info: {
     flex: 1,
-    paddingLeft: PADDING,
+    width: undefined,
+    height: undefined,
+    resizeMode: "cover",
   },
   profile_img: {
     width: IMAGE_WIDTH,
     height: IMAGE_WIDTH,
-    resizeMode: "cover",
+    overflow: "hidden",
+    borderRadius: IMAGE_WIDTH / 2,
   },
   info: {
     borderBottomColor: "#000",

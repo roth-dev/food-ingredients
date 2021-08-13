@@ -10,7 +10,7 @@ interface IUser {
   createdAt?: string;
   updatedAt?: string;
   image?: Image;
-  phone?: number;
+  phonenumber?: string;
   role?: Rols;
 }
 interface Rols {

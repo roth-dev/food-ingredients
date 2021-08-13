@@ -23,6 +23,7 @@ import assets from "../../assets";
 import { login } from "../../store/actions/user";
 import { UserInput } from "../../models/user";
 import Validate from "../../utils/validate";
+import { navigate } from "../../navigation/navigation";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -187,7 +188,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
             textAlign: "center",
           }}
         >
-          And login with account delivery only
+          And login with account delivery and customer
         </Label>
         <Input
           value={userInput.identifier}
@@ -253,6 +254,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
             marginTop: BOTTOM,
             alignItems: "center",
           }}
+          onPress={() => navigate("SignUp")}
         >
           <Label
             style={{

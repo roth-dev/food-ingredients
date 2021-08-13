@@ -1,6 +1,9 @@
 export interface UserInput {
-  identifier: string
-  password: string
+  identifier?: string
+  username?:string
+  email?:string
+  phonenumber?:string
+  password?: string
 }
 
 export interface UserResponse {

@@ -17,6 +17,7 @@ export type MainParamList = {
 export type AuthParamList = {
   Welcome: undefined;
   Login: undefined;
+  SignUp:undefined;
 };
 
 export type DeliveryParamList = {

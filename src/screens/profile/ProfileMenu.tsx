@@ -141,7 +141,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = (props) => {
             titleBold
             style={[styles.info, { borderBottomWidth: undefined }]}
             titleStyle={styles.title}
-            title={`0${user?.phone}`}
+            title={user?.phonenumber}
           />
         </View>
       </View>

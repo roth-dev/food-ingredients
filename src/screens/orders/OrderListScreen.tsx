@@ -55,7 +55,6 @@ const OrderListScreen: React.FC<OrderListScreenProps> = (props) => {
               {/* put image instead */}
               <LabelIcon iconStyle={styles.icon} leftIcon={Icons.gift} />
               <View style={{ justifyContent: "center" }}>
-                <Text style={{ fontSize: FONT_SIZE_18 }}>name of user</Text>
                 <Text style={{ fontSize: FONT_SIZE_15, color: "gray" }}>
                   14/08/2021 17:50
                 </Text>

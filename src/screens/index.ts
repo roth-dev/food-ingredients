@@ -27,3 +27,5 @@ export { default as OrderListScreen } from "./orders/OrderListScreen";
 export { default as PromotionScreen } from "./promos/PromotionScreen";
 
 export { default as OrderSuccess } from "./cart/OrderSuccesScreen";
+
+export {default as SignUpScreen} from "./auth/SignUpScreen";

@@ -17,4 +17,5 @@ export default {
   POPULARBURGER: require('./popularBurger.png'),
   IMAGE_BACKGROUND: require('./background-detail.png'),
   MAP_MARKER: require('./map-marker.png'),
+  LOGO_APP:require('./logoapp.png')
 }
