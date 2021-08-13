@@ -22,6 +22,8 @@ import {
   HomeDelivery,
   OrderDelivery,
   DeliveryProfile,
+  SettingDelivery,
+  EditProfileDelivery,
 } from "../../screens/delivery/index";
 const IMAGE = WTDP(5.5, 600);
 const styles = StyleSheet.create({
@@ -147,6 +149,11 @@ const ProfileStack = () => {
         }}
         name="DeliveryProfile"
         component={DeliveryProfile}
+      />
+      <Stack.Screen name="SettingDelivery" component={SettingDelivery} />
+      <Stack.Screen
+        name="EditProfileDelivery"
+        component={EditProfileDelivery}
       />
     </Stack.Navigator>
   );

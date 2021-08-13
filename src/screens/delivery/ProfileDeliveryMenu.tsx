@@ -159,12 +159,12 @@ const ProfileDeliveryMenu: React.FC<ProfileDeliveryMenuProps> = (props) => {
         <Menu
           icon={Icons.slidersH}
           title="Settings"
-          onPress={() => navigate("Settings")}
+          onPress={() => navigate("SettingDelivery")}
         />
         <Menu
           icon={Icons.userEdit}
           title="Edit Profile"
-          onPress={() => navigate("EditProfile")}
+          onPress={() => navigate("EditProfileDelivery")}
         />
         <Menu icon={Icons.powerOff} title="Logout" onPress={onLogout} />
       </View>

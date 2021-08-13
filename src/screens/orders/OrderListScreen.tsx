@@ -7,11 +7,13 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import { HPADDING, PADDING, BOTTOM } from "../../styles/scale";
 import { Button, Icons, LabelIcon } from "../../components/commons";
 import { Colors } from "../../styles";
 import {
+  FONT_SIZE_12,
   FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_18,
@@ -43,52 +45,58 @@ interface OrderListScreenProps {}
 
 const OrderListScreen: React.FC<OrderListScreenProps> = (props) => {
   return (
-    <TouchableOpacity>
-      <View style={styles.item}>
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flexDirection: "column" }}>
-            {/* put image instead */}
-            <LabelIcon iconStyle={styles.icon} leftIcon={Icons.gift} />
-          </View>
+    <ScrollView>
+      <TouchableOpacity>
+        <View style={styles.item}>
           <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <View style={{ justifyContent: "center" }}>
-              <Text style={{ fontSize: FONT_SIZE_15, color: "gray" }}>
-                14/08/2021 17:50
-              </Text>
-              <Text style={{ fontSize: FONT_SIZE_15 }}>ស្ងោរជ្រក់សាច់គោ</Text>
-              <Text style={{ fontSize: FONT_SIZE_15 }}>Total : $5.00</Text>
+            <View style={{ flexDirection: "row", margin: HPADDING }}>
+              {/* put image instead */}
+              <LabelIcon iconStyle={styles.icon} leftIcon={Icons.gift} />
+              <View style={{ justifyContent: "center" }}>
+                <Text style={{ fontSize: FONT_SIZE_18 }}>name of user</Text>
+                <Text style={{ fontSize: FONT_SIZE_15, color: "gray" }}>
+                  14/08/2021 17:50
+                </Text>
+                <Text style={{ fontSize: FONT_SIZE_15 }}>ស្ងោរជ្រក់សាច់គោ</Text>
+                <Text style={{ fontSize: FONT_SIZE_15 }}>Total : $5.00</Text>
+              </View>
             </View>
-            <View style={{ marginLeft: BOTTOM * 8 }}>
-              <Text style={{ fontSize: FONT_SIZE_15, color: "black" }}>
-                Finish
-              </Text>
+            <View style={{ flexDirection: "row", margin: HPADDING }}>
+              <View>
+                <Text
+                  style={{
+                    fontSize: FONT_SIZE_15,
+                    color: "black",
+                    textAlign: "right",
+                  }}
+                >
+                  Finish
+                </Text>
+                <Button
+                  title="Order Again"
+                  style={{
+                    width: 90,
+                    height: 40,
+                    borderRadius: 5,
+                    backgroundColor: Colors.BLUE,
+                    marginTop: BOTTOM,
+                  }}
+                  loading={false}
+                  //onPress={onVerify}
+                  textStyle={{
+                    flex: 1,
+                    textAlign: "center",
+                    fontSize: FONT_SIZE_12,
+                  }}
+                />
+              </View>
             </View>
-          </View>
-          <View style={{ margin: PADDING, marginTop: BOTTOM }}>
-            <Button
-              title="Order Again"
-              style={{
-                borderRadius: 5,
-                backgroundColor: Colors.BLUE,
-              }}
-              loading={false}
-              //onPress={onVerify}
-              textStyle={{
-                flex: 1,
-                textAlign: "center",
-                fontSize: FONT_SIZE_18,
-                padding: PADDING,
-              }}
-            />
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </ScrollView>
   );
 };
 export default OrderListScreen;

@@ -24,4 +24,6 @@ export type DeliveryParamList = {
   HistoryDelivery:undefined;
   OrderDelivery:undefined;
   DeliveryProfile:undefined;
+  SettingDelivery:undefined;
+  EditProfileDelivery:undefined;
 };
