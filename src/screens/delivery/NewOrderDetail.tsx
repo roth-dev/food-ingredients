@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { getRouteParam, INavigationScreenProps } from "../../navigation";
 import NewOrder from "./components/NewOrder";
 
@@ -16,7 +17,9 @@ const NewOrderDetail: React.FC<INavigationScreenProps> = (props) => {
   const detail = getParams("detail", false);
   return (
     <View style={styles.container}>
-      <NewOrder detail={detail} />
+      <ScrollView>
+        <NewOrder detail={detail} />
+      </ScrollView>
     </View>
   );
 };

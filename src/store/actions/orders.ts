@@ -4,7 +4,9 @@ import { RootState } from "../index";
 import { Type } from "../type";
 import { OrderActions } from "../reducers/orders";
 
-function generateNumber() {}
+function generateNumber() {
+  return Math.floor(Math.random() * 1000);
+}
 
 export const success = (data: any): OrderActions => {
   return {
@@ -31,7 +33,7 @@ export const createOrder = (): ThunkAction<
         note: "I need more spicies",
         deliveries: "60eabf1e266fab394824c1dd",
         users_permissions_user: user?._id,
-        ordernumber: 123234354,
+        ordernumber: generateNumber(),
         address: "phumi ta vean,siem reap",
       });
       const data = rs.data;
@@ -51,5 +53,25 @@ export const createOrder = (): ThunkAction<
     } catch (err) {
       throw new Error(err.message);
     }
+  };
+};
+
+export const getOrder = (): ThunkAction<
+  Promise<void>,
+  RootState,
+  {},
+  OrderActions
+> => {
+  return async (
+    dispatch: ThunkDispatch<Promise<void>, {}, OrderActions>,
+    getState: () => RootState
+  ) => {
+    try {
+      const res = await API.get("orderdetails");
+      dispatch({
+        type: Type.GET_ORDERS,
+        payload: { orderx: res.data },
+      });
+    } catch (e) {}
   };
 };

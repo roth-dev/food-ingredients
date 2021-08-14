@@ -3,11 +3,12 @@ import { View, Text, StyleSheet } from "react-native";
 import { Button, Icons, Label } from "../../../components/commons";
 import { goBack } from "../../../navigation/navigation";
 import { Themes } from "../../../styles";
-import { PADDING } from "../../../styles/scale";
+import { BOTTOM, HPADDING, PADDING } from "../../../styles/scale";
 import { FONT_SIZE_18 } from "../../../styles/Typography";
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: BOTTOM,
     margin: PADDING,
   },
 });
@@ -16,7 +17,7 @@ interface HeaderTrackingProps {}
 
 const HeaderTracking: React.FC<HeaderTrackingProps> = (props) => {
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <View style={[Themes.ROW, styles.container]}>
         <Button
           onPress={() => goBack()}

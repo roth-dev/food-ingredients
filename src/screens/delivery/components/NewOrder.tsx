@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import assets from "../../../assets";
 import { Button, Label } from "../../../components/commons";
 import { navigate } from "../../../navigation/navigation";
+import { useAppSelector } from "../../../store";
 import { Colors, Themes } from "../../../styles";
 import { HPADDING, HTDP, PADDING, WTDP } from "../../../styles/scale";
 import {
@@ -45,6 +46,11 @@ interface Props {
 }
 
 const NewOrder: React.FC<Props> = (props) => {
+  const data = useAppSelector((state) => {
+    const item = state.orders.orderx;
+    return item?.slice(item.length - 1);
+  });
+  const product = data[0].products[0];
   const handlePress = () => {
     if (!props.detail) return navigate("NewOrderDetail", { detail: true });
     navigate("Tracking");
@@ -53,7 +59,7 @@ const NewOrder: React.FC<Props> = (props) => {
     <View>
       {!props.detail && (
         <View style={{ flex: 0, marginBottom: PADDING }}>
-          <Image source={assets.IMAGE_BACKGROUND} style={styles.bg} />
+          <Image source={{ uri: product.image.url }} style={styles.bg} />
         </View>
       )}
 
@@ -61,7 +67,7 @@ const NewOrder: React.FC<Props> = (props) => {
         <View style={[Themes.ROW]}>
           <Image source={assets.PROFILE} style={styles.img} />
           <View style={{ paddingLeft: PADDING }}>
-            <Label style={{ fontSize: FONT_SIZE_18 }}>SAM</Label>
+            <Label style={{ fontSize: FONT_SIZE_18 }}>Heng Sotheareak</Label>
             <Label style={{ fontSize: FONT_SIZE_18 }}>Customer</Label>
           </View>
         </View>
@@ -78,13 +84,7 @@ const NewOrder: React.FC<Props> = (props) => {
           <Label>10 Ingredient</Label>
         </View>
         <View style={{ paddingTop: PADDING }}>
-          <Label style={styles.ingredient_text}>- Ingredient 1</Label>
-          <Label style={styles.ingredient_text}>- Ingredient 2</Label>
-          <Label style={styles.ingredient_text}>- Ingredient 3</Label>
-          <Label style={styles.ingredient_text}>- Ingredient 4</Label>
-          <Label style={styles.ingredient_text}>- Ingredient 5</Label>
-          <Label style={styles.ingredient_text}>- Ingredient 6</Label>
-          <Label style={styles.ingredient_text}>- Ingredient 7</Label>
+          <Label style={styles.ingredient_text}>{product.ingredients}</Label>
         </View>
         <View
           style={{
@@ -114,7 +114,7 @@ const NewOrder: React.FC<Props> = (props) => {
               textAlign: "right",
             }}
           >
-            $12.00
+            ${product.price.toFixed(2)}
           </Label>
         </View>
         <View
@@ -134,7 +134,7 @@ const NewOrder: React.FC<Props> = (props) => {
               backgroundColor: "#333",
               borderRadius: 10,
             }}
-            title="Accept"
+            title={!props.detail ? "Accept" : "View Location"}
             onPress={handlePress}
           />
           <Button
