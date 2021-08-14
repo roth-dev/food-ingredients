@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import assets from "../../../assets";
 import { Button, Label } from "../../../components/commons";
+import { navigate } from "../../../navigation/navigation";
 import { Colors, Themes } from "../../../styles";
 import { HPADDING, HTDP, PADDING, WTDP } from "../../../styles/scale";
 import {
@@ -39,14 +40,22 @@ const styles = StyleSheet.create({
   },
 });
 
-interface NewOrderProps {}
+interface Props {
+  detail: boolean;
+}
 
-const NewOrder: React.FC<NewOrderProps> = (props) => {
+const NewOrder: React.FC<Props> = (props) => {
+  const handlePress = () => {
+    if (!props.detail) return navigate("NewOrderDetail", { detail: true });
+    navigate("Tracking");
+  };
   return (
     <View>
-      <View style={{ flex: 0, marginBottom: PADDING }}>
-        <Image source={assets.IMAGE_BACKGROUND} style={styles.bg} />
-      </View>
+      {!props.detail && (
+        <View style={{ flex: 0, marginBottom: PADDING }}>
+          <Image source={assets.IMAGE_BACKGROUND} style={styles.bg} />
+        </View>
+      )}
 
       <View style={styles.container}>
         <View style={[Themes.ROW]}>
@@ -126,6 +135,7 @@ const NewOrder: React.FC<NewOrderProps> = (props) => {
               borderRadius: 10,
             }}
             title="Accept"
+            onPress={handlePress}
           />
           <Button
             textStyle={{

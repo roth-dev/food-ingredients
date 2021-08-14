@@ -24,7 +24,10 @@ import {
   DeliveryProfile,
   SettingDelivery,
   EditProfileDelivery,
+  NewOrderDetail,
+  TrackingScreen,
 } from "../../screens/delivery/index";
+import HeaderLeft from "../header/headerLeft";
 const IMAGE = WTDP(5.5, 600);
 const styles = StyleSheet.create({
   container: {
@@ -104,10 +107,26 @@ const HomeDeliveryStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerLeft: (props) => <HeaderLeft {...props} />,
       }}
     >
-      <Stack.Screen name="HomeDelivery" component={HomeDelivery} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="HomeDelivery"
+        component={HomeDelivery}
+      />
+      <Stack.Screen
+        options={{ title: "Order Detail" }}
+        name="NewOrderDetail"
+        component={NewOrderDetail}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Tracking"
+        component={TrackingScreen}
+      />
     </Stack.Navigator>
   );
 };

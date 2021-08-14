@@ -17,14 +17,16 @@ export type MainParamList = {
 export type AuthParamList = {
   Welcome: undefined;
   Login: undefined;
-  SignUp:undefined;
+  SignUp: undefined;
 };
 
 export type DeliveryParamList = {
   HomeDelivery: undefined;
-  HistoryDelivery:undefined;
-  OrderDelivery:undefined;
-  DeliveryProfile:undefined;
-  SettingDelivery:undefined;
-  EditProfileDelivery:undefined;
+  HistoryDelivery: undefined;
+  OrderDelivery: undefined;
+  DeliveryProfile: undefined;
+  SettingDelivery: undefined;
+  EditProfileDelivery: undefined;
+  NewOrderDetail: undefined;
+  Tracking: undefined;
 };
